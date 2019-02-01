@@ -1,0 +1,44 @@
+/*图标font的样式*/
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+/*tab激活状态的字体颜色*/
+.van-tab--active{
+    color:#6bb44e;
+}
+
+/*类型是card的tab的字体*/
+.cardTab .van-tab{
+    font-size: 12px;
+}
+
+/*农业气象中tab的样式*/
+.agriculture_tab .van-tabs__nav {
+    background-color: transparent;
+}
+
+.agriculture_tab .van-tab {
+    background-color: transparent;
+    color:#fff;
+}
+
+.agriculture_tab .van-tab--active{
+    color:#fff;
+}
+.agriculture_tab .van-tabs__line{
+    background-color:#fff;
+}
+
+.van-tabs__line{
+    background-color: #6bb44e;
+}
+
+/*查看更多的字体*/
+.read_more{
+    color:#6bb44e;
+    text-align: center;
+}
