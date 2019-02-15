@@ -63,10 +63,6 @@ export default {
   height: 94px;
 }
 
-.bottom_line{
-  border-bottom : 1px solid #d9d9d9;
-}
-
 .list_title{
   overflow: hidden;
   text-overflow: ellipsis;

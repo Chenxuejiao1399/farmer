@@ -49,6 +49,33 @@ export default new Router({
         title: '线下学习',
         requiresAuth: false
       }
+    },
+    {
+      path: '/activitydetails',
+      name: 'ActivityDetails',
+      component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/ActivityDetails'),
+      meta: {
+        title: '活动详情',
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/registeredlist',
+      name: 'RegisteredList',
+      component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/RegisteredList'),
+      meta: {
+        title: '已报名列表',
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/launchacitivity',
+      name: 'LaunchAcitivity',
+      component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/LaunchAcitivity'),
+      meta: {
+        title: '发起活动',
+        requiresAuth: false
+      }
     }
 
   ]

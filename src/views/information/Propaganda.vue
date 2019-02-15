@@ -27,11 +27,7 @@
             <van-tabs type="card" color="#6fb553" class="cardTab">
               <van-tab title="帮扶人员分布">
                 <div class="map_bg">
-                  <ve-bmap height="35vh"
-                    :settings="chartSettings"
-                    :series="chartSeries"
-                    :tooltip="chartTooltip">
-                  </ve-bmap>
+                  <b-map></b-map>
                 </div>
               </van-tab>
               <van-tab title="帮扶信息统计">
@@ -56,12 +52,14 @@
 import PolicyList from './components/PolicyList'
 import VillageList from './components/VillageList'
 import SwipeCard from './components/SwipeCard'
+import BMap from './components/BMap'
 export default {
   name: 'Propaganda',
   components: {
     'policy-list': PolicyList,
     'village-list': VillageList,
-    'swipe-card': SwipeCard
+    'swipe-card': SwipeCard,
+    'b-map': BMap
   },
   data () {
     this.extend = {
@@ -72,16 +70,6 @@ export default {
       color: ['#f29530'],
       grid: [{ top: 20, left: 20, bottom: 10, right: 20, show: true }]
     }
-    this.chartSettings = {
-      key: 'oBvDtR6nzWtVchkY4cLHtnah1VVZQKRK',
-      bmap: {
-        center: [106.53, 26.68],
-        zoom: 14,
-        roam: true,
-        mapStyle: {}
-      }
-    }
-    this.chartTooltip = { show: true }
     return {
       chartData: {
         columns: ['日期', '访问用户'],
@@ -100,16 +88,6 @@ export default {
         'http://localhost:8080/static/img/2.28c5e1a8.jpg',
         'http://localhost:8080/static/img/3.887c0ff1.jpg',
         'http://localhost:8080/static/img/2.28c5e1a8.jpg'
-      ],
-      chartSeries: [
-        {
-          type: 'scatter',
-          coordinateSystem: 'bmap',
-          data: [
-            [106.53, 26.68],
-            [106.54, 26.68]// 经度，维度，value，...
-          ]
-        }
       ],
       isShow: true,
       type: 'noTag'

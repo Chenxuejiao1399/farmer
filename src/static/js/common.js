@@ -10,12 +10,13 @@ commonTools.getQueryString = function (name) {
   }
 }
 
-commonTools.drawLine = function (name) {
-  let ctx = name.getContext('2d')
-  ctx.strokeStyle = '#ff0000'
-  ctx.moveTo(0, 0)
-  ctx.lineTo(200, 100)
-  ctx.stroke()
+/* 中国标准时间转换 */
+commonTools.formatDate = function (date) {
+  var d = date
+  var year = d.getFullYear()
+  var month = d.getMonth() + 1 > 9 ? d.getMonth() + 1 : '0' + (d.getMonth() + 1)
+  var date1 = d.getDate() > 9 ? d.getDate() : '0' + d.getDate()
+  return year + '-' + month + '-' + date1
 }
 
 export {

@@ -54,10 +54,6 @@ export default {
   padding: 1vh 0;
 }
 
-.bottom_line{
-  border-bottom : 1px solid #d9d9d9;
-}
-
 .list_img{
   width: 100%;
   border-radius: 8px;

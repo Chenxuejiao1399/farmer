@@ -1,7 +1,7 @@
 <template>
   <div>
     <vue-headful description="活动列表"></vue-headful>
-    <div  :class="[index !== (lists.length-1)?'bottom_line':'','activity_card']" v-for="(item,index) in lists" :key="index">
+    <div  :class="[index !== (lists.length-1)?'bottom_line':'','activity_card']" v-for="(item,index) in lists" :key="index" @click="goDetail">
       <van-row>
         <van-col span="9">
           <div class="activity_card_img">
@@ -32,6 +32,11 @@ export default {
       lists: ['来百花湖学习拖拉机的操作名额有限，速来报名来百花湖学习拖拉机的操作名额有限，速来报名来百花湖学习拖拉机的操作名额有限，速来报名', '来百花湖学习拖拉机的操作名额有限，速来报名', '来百花湖学习拖拉机的操作名额有限，速来报名', '来百花湖学习拖拉机的操作名额有限，速来报名',
         '来百花湖学习拖拉机的操作名额有限，速来报名', '来百花湖学习拖拉机的操作名额有限，速来报名', '来百花湖学习拖拉机的操作名额有限，速来报名', '来百花湖学习拖拉机的操作名额有限，速来报名']
     }
+  },
+  methods: {
+    goDetail () {
+      this.$router.push({ name: 'ActivityDetails' })
+    }
   }
 }
 </script>
@@ -40,10 +45,6 @@ export default {
   .activity_card{
     margin: 1vh 4vw;
     padding-bottom:1vh;
-  }
-
-  .bottom_line{
-    border-bottom : 1px solid #d9d9d9;
   }
 
   .activity_card .activity_card_img{
