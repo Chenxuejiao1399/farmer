@@ -76,7 +76,15 @@ export default new Router({
         title: '发起活动',
         requiresAuth: false
       }
+    },
+    {
+      path: '/onlinelist',
+      name: 'OnlineList',
+      component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/OnlineList'),
+      meta: {
+        title: '线上交流',
+        requiresAuth: false
+      }
     }
-
   ]
 })

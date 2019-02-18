@@ -13,10 +13,12 @@
           线下学习
         </van-col>
         <van-col span="12" class="train_box_col">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-liuyan"></use>
-          </svg>
-          线上交流
+          <div @click="goOnline">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-liuyan"></use>
+            </svg>
+            线上交流
+          </div>
         </van-col>
       </van-row>
     </div>
@@ -32,6 +34,11 @@ export default {
   },
   data () {
     return {}
+  },
+  methods: {
+    goOnline () {
+      this.$router.push({ name: 'OnlineList' })
+    }
   }
 }
 </script>
