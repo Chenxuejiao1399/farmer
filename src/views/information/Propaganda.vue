@@ -27,7 +27,7 @@
             <van-tabs type="card" color="#6fb553" class="cardTab">
               <van-tab title="帮扶人员分布">
                 <div class="map_bg">
-                  <b-map></b-map>
+                  <a-map></a-map>
                 </div>
               </van-tab>
               <van-tab title="帮扶信息统计">
@@ -52,14 +52,14 @@
 import PolicyList from './components/PolicyList'
 import VillageList from './components/VillageList'
 import SwipeCard from './components/SwipeCard'
-import BMap from './components/BMap'
+import AMap from './components/AMap'
 export default {
   name: 'Propaganda',
   components: {
     'policy-list': PolicyList,
     'village-list': VillageList,
     'swipe-card': SwipeCard,
-    'b-map': BMap
+    'a-map': AMap
   },
   data () {
     this.extend = {

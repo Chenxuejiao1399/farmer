@@ -4,7 +4,6 @@ import router from './router'
 import Vant, { Lazyload } from 'vant'
 import vueHeadful from 'vue-headful'
 import VeHistogram from 'v-charts/lib/histogram.common'
-import VeBmap from 'v-charts/lib/bmap.common'
 
 import { commonTools } from './static/js/common'
 import './static/css/font/iconfont'
@@ -19,7 +18,6 @@ Vue.prototype.$commonTools = commonTools
 Vue.use(Lazyload)
 Vue.component('vue-headful', vueHeadful)
 Vue.component(VeHistogram.name, VeHistogram)
-Vue.component(VeBmap.name, VeBmap)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
