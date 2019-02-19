@@ -1,12 +1,12 @@
 <template>
-  <div></div>
-</template>
+  <div>
 
+  </div>
+</template>
 <script>
 export default {
-  name: 'MyInfo'
+  name: 'online-discuss'
 }
 </script>
-
 <style scoped>
 </style>
