@@ -60,3 +60,9 @@
     height: 45px;
     border:1px #75b859 solid;
 }
+
+.avatar_lager_no{
+    border-radius: 50%;
+    width:45px;
+    height: 45px;
+}

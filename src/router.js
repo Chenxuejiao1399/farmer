@@ -85,6 +85,24 @@ export default new Router({
         title: '线上交流',
         requiresAuth: false
       }
+    },
+    {
+      path: '/onlinechat',
+      name: 'OnlineChat',
+      component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/OnlineChat'),
+      meta: {
+        title: '线上交流',
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/homevillage',
+      name: 'HomeVillage',
+      component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/HomeVillage'),
+      meta: {
+        title: '本村项目',
+        requiresAuth: false
+      }
     }
   ]
 })

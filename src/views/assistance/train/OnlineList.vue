@@ -26,7 +26,8 @@
             </van-row>
           </div>
           <div v-if="item.isShow">
-            <div class="online_list_item_second"  v-for="(itemC,indexC) in item.farmers" :key="indexC">
+            <div class="online_list_item_second"  v-for="(itemC,indexC) in item.farmers" :key="indexC"
+            @click="goChat">
               <img src="../../../static/3.jpg" class="avatar">
               <div class="name_div">{{itemC.name}}</div>
             </div>
@@ -53,6 +54,9 @@ export default {
           value.isShow = !itemTemp.isShow
         }
       })
+    },
+    goChat () {
+      this.$router.push({ name: 'OnlineChat' })
     }
   }
 }
