@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import axios from 'axios'
 import router from './router'
-import Vant, { Lazyload } from 'vant'
+import Vant, {
+  Lazyload
+} from 'vant'
 import vueHeadful from 'vue-headful'
 import VeHistogram from 'v-charts/lib/histogram.common'
-
-import { commonTools } from './static/js/common'
+import {
+  commonTools
+} from './static/js/common'
 import './static/css/font/iconfont'
-
 import 'vant/lib/index.css'
 import './static/css/common.css'
-
 import App from './App.vue'
-
 Vue.use(Vant)
 Vue.prototype.$commonTools = commonTools
 Vue.use(Lazyload)
