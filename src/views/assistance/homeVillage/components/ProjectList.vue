@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="list_bg">
     <vue-headful description="项目列表"></vue-headful>
     <div class="list_card" v-for="(item,index) in listData" :key="index">
       <van-row type="flex" align="center">
         <van-col span="4">
           <img src="../../../../static/3.jpg" class="avatar_lager_no">
         </van-col>
-        <van-col span="20" class="bottom_line">
+        <van-col span="20" :class="[index !== (listData.length-1)?'bottom_line':'']">
           <div class="title" v-text="item.name"></div>
           <div class="texts">项目启动于2019年3月20日，为实现球盖菇的种植丰收而设立，距今1年有余。</div>
           <div class="time">2019-04-05 <van-tag plain round color="#4e77b4">已参加</van-tag></div>
@@ -21,15 +21,21 @@ export default {
   name: 'ProjectList',
   data () {
     return {
-      listData: [{ name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }]
+      listData: [{ name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }]
     }
   }
 }
 </script>
 
 <style scoped>
+  .list_bg{
+    background-color: #f2f4f0;
+    padding-top: 1vh;
+  }
+
   .list_card{
-    margin: 1vh 4vw;
+    padding: 1vh 4vw;
+    background-color: #ffffff;
   }
 
   .list_card .title{

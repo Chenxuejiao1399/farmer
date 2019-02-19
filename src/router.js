@@ -103,6 +103,15 @@ export default new Router({
         title: '本村项目',
         requiresAuth: false
       }
+    },
+    {
+      path: '/industry',
+      name: 'Industry',
+      component: () => import(/* webpackChunkName: "Industry" */ './views/assistance/industry/Industry'),
+      meta: {
+        title: '特色产业',
+        requiresAuth: false
+      }
     }
   ]
 })

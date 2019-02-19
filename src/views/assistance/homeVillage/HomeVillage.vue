@@ -1,7 +1,7 @@
 <template>
   <div>
     <vue-headful title="本村项目e"></vue-headful>
-    <van-tabs v-model="active">
+    <van-tabs sticky v-model="active">
       <van-tab title="本村项目">
         <project-list></project-list>
       </van-tab>
