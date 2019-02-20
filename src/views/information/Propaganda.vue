@@ -46,7 +46,6 @@
                 <div class="map_bg">
                   <mapDrag
                     @drag="dragMap"
-                    class="mapbox"
                   ></mapDrag>
                 </div>
               </van-tab>

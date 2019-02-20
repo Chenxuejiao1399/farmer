@@ -8,12 +8,6 @@
             <div class="product_top_name">毛栗村</div>
             <div>毛栗村生产合作社</div>
           </div>
-          <!--<div class="product_top_menu">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-chuangjianyingyong_fu1"></use>
-            </svg>
-
-          </div>-->
           <van-row class="product_top_menu" type="flex" justify="center">
             <van-col span="6">
               <svg class="icon" aria-hidden="true">
@@ -42,12 +36,53 @@
           </van-row>
         </div>
       </div>
+      <div class="product_middle">
+        <div class="product_middle_title">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zhongzhi"></use>
+          </svg>
+          种植土地分布
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-tudi"></use>
+          </svg>
+        </div>
+        <div class="product_middle_map">
+          <mapDrag @drag="dragMap"></mapDrag>
+        </div>
+      </div>
+      <div class="product_bottom">
+        <div>
+          <svg class="icon" aria-hidden="true" style="color: #e0796a">
+            <use xlink:href="#icon-didian"></use>
+          </svg>竹林村
+        </div>
+        <div>
+          <svg class="icon" aria-hidden="true" style="color: #4e9c2c">
+            <use xlink:href="#icon-didian"></use>
+          </svg>竹林村
+        </div>
+        <div>
+          <svg class="icon" aria-hidden="true" style="color: #dbbe15">
+            <use xlink:href="#icon-didian"></use>
+          </svg>竹林村
+        </div>
+        <div>
+          <svg class="icon" aria-hidden="true" style="color: #e7851c">
+            <use xlink:href="#icon-didian"></use>
+          </svg>竹林村
+        </div>
+
+      </div>
     </div>
 </template>
 
 <script>
+import mapDrag from '../../information/components/AMap'
 export default {
-  name: 'ProductManagement'
+  name: 'ProductManagement',
+  components: {
+    mapDrag
+  }
 }
 </script>
 
@@ -95,4 +130,39 @@ export default {
     font-size: 32px;
     padding-bottom: 6px;
   }
+
+  .product_middle{
+    margin-top: 7vh;
+  }
+
+  .product_middle svg{
+    color: #6bb44e;
+    font-size: 17px;
+  }
+
+  .product_middle_title{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .product_middle_map{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 2vh 2vh 1vh 2vh;
+    height: 35vh;
+  }
+
+  .product_bottom{
+    background-color: #f0f0f0;
+    display: flex;
+    padding: 1vh 4vw;
+    margin: 0 4vw;
+    border-radius: 5px;
+  }
+
+  .product_bottom div{
+    padding-right: 10px;
+  }
+
 </style>
