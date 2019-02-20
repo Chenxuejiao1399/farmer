@@ -105,6 +105,25 @@ export default new Router({
       }
     },
     {
+      path: '/projectdetail',
+      name: 'ProjectDetail',
+      component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/ProjectDetail'),
+      meta: {
+        title: '项目详情',
+        requiresAuth: false
+      }
+    },
+    ,
+    {
+      path: '/productmanagement',
+      name: 'ProductManagement',
+      component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/ProductManagement'),
+      meta: {
+        title: '生产管理',
+        requiresAuth: false
+      }
+    },
+    {
       path: '/industry',
       name: 'Industry',
       component: () => import(/* webpackChunkName: "Industry" */ './views/assistance/industry/Industry'),
