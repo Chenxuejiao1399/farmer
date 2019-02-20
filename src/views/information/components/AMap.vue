@@ -126,21 +126,6 @@ export default {
                 color: 'orange'
               }
             })
-          var marker3 = new SvgMarker(
-            new SvgMarker.Shape.IconFont({
-              // 参见 symbol引用, http://www.iconfont.cn/plus/help/detail?helptype=code
-              symbolJs: null,
-              icon: 'icon-icon-test3',
-              size: 50,
-              offset: [-50, -78],
-              fillColor: 'black'
-            }), {
-              map: map,
-              position: lngLats[3],
-              showPositionPoint: {
-                color: 'orange'
-              }
-            })
         })
 
         /**
