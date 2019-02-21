@@ -59,7 +59,7 @@
                 <use xlink:href="#icon-hezuoshe"></use>
               </svg>
             </span>
-            <span class="label">签到</span>
+            <span class="label">我的合作社</span>
           </div>
           <div class="info-text">
             <span>毛利村民居委会</span>
@@ -82,7 +82,7 @@
                 <use xlink:href="#icon-jifen"></use>
               </svg>
             </span>
-            <span class="label">签到</span>
+            <span class="label">我的积分</span>
           </div>
           <div class="info-text">
             <span> 张三</span>
@@ -105,7 +105,7 @@
                 <use xlink:href=" #icon-shijian"></use>
               </svg>
             </span>
-            <span class="label">签到</span>
+            <span class="label">浏览日志</span>
           </div>
           <div class="info-text">
             <span> 张三</span>
