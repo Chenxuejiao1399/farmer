@@ -47,7 +47,7 @@
           </svg>
         </div>
         <div class="product_middle_map">
-          <mapDrag @drag="dragMap"></mapDrag>
+          地图
         </div>
       </div>
       <div class="product_bottom">
@@ -77,12 +77,8 @@
 </template>
 
 <script>
-import mapDrag from '../../information/components/AMap'
 export default {
   name: 'ProductManagement',
-  components: {
-    mapDrag
-  }
 }
 </script>
 

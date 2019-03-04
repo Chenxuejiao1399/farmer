@@ -1,16 +1,9 @@
 <template>
   <div class="propaganda_bg">
-    <vue-headful
-      title="宣传天地"
-      description="宣传天地主页"
-    />
-    <van-tabs
-      color="#6fb553"
-      sticky
-      @click="getActiveTab"
-    >
+    <vue-headful title="宣传天地" description="宣传天地主页"/>
+    <van-tabs color="#6fb553" sticky @click="getActiveTab">
       <van-tab title="最新政策">
-        <policy-list></policy-list>
+        <policy-list :type="1"></policy-list>
       </van-tab>
       <van-tab title="共建乡村">
         <div v-if="isShow">
@@ -20,33 +13,21 @@
               <span>308座厂房</span>
             </div>
             <div class="propaganda_top_icon">
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-jiangzhang"></use>
               </svg>
               扶贫模范
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-jiangzhang1"></use>
               </svg>
             </div>
             <swipe-card :listType="type"></swipe-card>
           </div>
           <div class="propaganda_middle">
-            <van-tabs
-              type="card"
-              color="#6fb553"
-              class="cardTab"
-            >
+            <van-tabs type="card" color="#6fb553" class="cardTab">
               <van-tab title="帮扶人员分布">
                 <div class="map_bg">
-                  <mapDrag
-                    @drag="dragMap"
-                  ></mapDrag>
+                  地图
                 </div>
               </van-tab>
               <van-tab title="帮扶信息统计">
@@ -75,8 +56,7 @@
               </div>
               <div>
                 <span class="icon-wrapper">
-                  <svg
-                    class="icon"
+                  <svg class="icon"
                     aria-hidden="true"
                   >
                     <use xlink:href="#icon-icon-test"></use>
@@ -120,32 +100,29 @@
             </div>
           </div>
           <div class="propaganda_bottom">
-            <village-list></village-list>
+            <village-list :type="2" :listLength = "4"></village-list>
             <div
               class="read_more"
               @click="getMore"
             >查看更多>></div>
           </div>
         </div>
-        <village-list v-if="!isShow"></village-list>
+        <village-list :type="2" v-if="!isShow"></village-list>
       </van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
-import mapDrag from './components/AMap'
 import PolicyList from './components/PolicyList'
 import VillageList from './components/VillageList'
 import SwipeCard from './components/SwipeCard'
 export default {
   name: 'Propaganda',
   components: {
-    mapDrag,
     'policy-list': PolicyList,
     'village-list': VillageList,
     'swipe-card': SwipeCard
-
   },
   data () {
     this.extend = {
@@ -176,17 +153,10 @@ export default {
         'http://localhost:8080/static/img/2.28c5e1a8.jpg'
       ],
       isShow: true,
-      type: 'noTag',
-      dragData: {
-        lng: null,
-        lat: null,
-        address: null,
-        nearestJunction: null,
-        nearestRoad: null,
-        nearestPOI: null
-      }
+      type: 'noTag'
     }
   },
+  mounted () {},
   methods: {
     getMore () {
       this.isShow = false
@@ -194,16 +164,6 @@ export default {
     getActiveTab (index) {
       if (index === 1) {
         this.isShow = true
-      }
-    },
-    dragMap (data) {
-      this.dragData = {
-        lng: data.position.lng,
-        lat: data.position.lat,
-        address: data.address,
-        nearestJunction: data.nearestJunction,
-        nearestRoad: data.nearestRoad,
-        nearestPOI: data.nearestPOI
       }
     }
   }

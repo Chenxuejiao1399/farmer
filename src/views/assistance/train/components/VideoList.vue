@@ -11,7 +11,7 @@
         </svg>
       </div>
       <div class="video_card" v-for="(item,index) in tags" :key="index">
-        <video src="../../../../static/1.mp4" controls="controls"></video>
+        <video src="" controls="controls"></video>
         <div class="video_card_texts">
           <span class="video_tag" v-text="item"></span>
           <div class="video_number">

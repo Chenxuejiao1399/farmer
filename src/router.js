@@ -4,13 +4,23 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [{
     path: '/propaganda',
     name: 'Propaganda',
     component: () => import(/* webpackChunkName: "Propaganda" */ './views/information/Propaganda'),
     meta: {
       title: '宣传天地',
-      requiresAuth: false
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/',
+    name: 'HelloWorld',
+    component: () => import('./components/HelloWorld'),
+    meta: {
+      title: '测试页面',
+      requiresAuth: true
     }
   },
   {
@@ -19,7 +29,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Agriculture" */ './views/information/Agriculture'),
     meta: {
       title: '农业气象',
-      requiresAuth: false
+      requiresAuth: true
     }
   },
   {
@@ -28,7 +38,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/Training'),
     meta: {
       title: '培训天地',
-      requiresAuth: false
+      requiresAuth: true
     }
   },
   {
@@ -37,7 +47,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/StudyVideo'),
     meta: {
       title: '学习视频',
-      requiresAuth: false
+      requiresAuth: true
     }
   },
   {
@@ -46,7 +56,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/OfflineLearning'),
     meta: {
       title: '线下学习',
-      requiresAuth: false
+      requiresAuth: true
     }
   },
   {
@@ -55,7 +65,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/ActivityDetails'),
     meta: {
       title: '活动详情',
-      requiresAuth: false
+      requiresAuth: true
     }
   },
   {
@@ -64,7 +74,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/RegisteredList'),
     meta: {
       title: '已报名列表',
-      requiresAuth: false
+      requiresAuth: true
     }
   },
   {
@@ -132,7 +142,7 @@ export default new Router({
   },
   {
     path: '/myinfo',
-    name: 'myinfo',
+    name: 'MyInfo',
     component: () => import(/* webpackChunkName: "MyInfo" */ './views/center/MyInfo.vue'),
     meta: {
       title: '个人中心',

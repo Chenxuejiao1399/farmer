@@ -3,14 +3,14 @@
     <div class="list_card" v-for="(item,index) in listData" :key="index">
       <van-row type="flex" :class="[index !== (listData.length-1)?'bottom_line':'','list_item']">
         <van-col span="9">
-          <img src="../../../static/3.jpg" class="list_img">
+          <img :src="item.image" class="list_img">
         </van-col>
         <van-col span="15" class="list_right">
           <div class="list_title" v-text="item.title"></div>
-          <div class="list_time_tag">
-            <span class="list_tag" v-text="item.tag"></span>
-            <span class="list_time">2018-04-05</span>
-          </div>
+          <van-row class="list_time_tag">
+            <van-col span="15"><span class="list_tag" v-text="item.tag"></span></van-col>
+            <van-col span="9"><span class="list_time" v-text="$commonTools.subStr(item.updated_at,10)"></span></van-col>
+          </van-row>
         </van-col>
       </van-row>
     </div>
@@ -20,20 +20,28 @@
 <script>
 export default {
   name: 'VillageList',
+  props: ['type', 'listLength'],
   data () {
     return {
-      listData: [
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '脱贫进程' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果百花湖村脱贫工作起到了有目共睹的成果百花湖村脱贫工作起到了有目共睹的成果百花湖村脱贫工作起到了有目共睹的成果百花湖村脱贫工作起到了有目共睹的成果', tag: '工信部网站' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '难点专攻' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '脱贫进程' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '难点专攻' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '脱贫进程' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '难点专攻' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '脱贫进程' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '脱贫进程' },
-        { title: '百花湖村脱贫工作起到了有目共睹的成果', tag: '脱贫进程' }
-      ]
+      listData: []
+    }
+  },
+  mounted () {
+    this.getListData()
+  },
+  methods: {
+    getListData () {
+      let vm = this
+      this.$http({
+        method: 'get',
+        url: vm.$commonTools.g_restUrl + '/categories/' + vm.type + '/articles'
+      })
+        .then(function (response) {
+          vm.listData = response.data.data
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
     }
   }
 }
@@ -77,7 +85,7 @@ export default {
   color: #999999;
   display: flex;
   justify-content: space-between;
-  height: 7.2vh;
+  height: 72px;
   align-items: flex-end;
 }
 

@@ -1,14 +1,10 @@
 import Vue from 'vue'
 import axios from 'axios'
 import router from './router'
-import Vant, {
-  Lazyload
-} from 'vant'
+import Vant, { Lazyload } from 'vant'
 import vueHeadful from 'vue-headful'
 import VeHistogram from 'v-charts/lib/histogram.common'
-import {
-  commonTools
-} from './static/js/common'
+import { commonTools } from './static/js/common'
 import './static/css/font/iconfont'
 import 'vant/lib/index.css'
 import './static/css/common.css'
@@ -23,26 +19,40 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
 /* router.beforeEach((to, from, next) => {
-  /!* indexOf 不等于-1是查到了这个字符串,表示是微信里的浏览器 *!/
-  let isWeiXin = () => { return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1 }
-  if (isWeiXin()) {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      /!* 如何判断之前是否有code *!/
-      /!* 第一次进入项目 *!/
-      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' +
-        'appid=wx99970402087a2872' +
-        '&redirect_uri=http://larabbs.test' +
-        '&response_type=code' +
-        '&scope=snsapi_userinfo' +
-        '&state=STATE#wechat_redirect'
-
-      /!* 之前授权过 *!/
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    let token = commonTools.getCookie('user_token')
+    if (!token) { // 没有token
+      let code = commonTools.getUrlParams('code', window.location.search)
+      if (code) { // 有code发送给后台取用户信息
+        axios({
+          method: 'post',
+          url: commonTools.g_restUrl + '/authorizations',
+          data: {
+            code: code
+          }
+        })
+          .then(function (response) {
+            if (response) {
+              commonTools.setCookie('user_token', JSON.stringify(response.data.access_token), 1)// 存用户的token
+              next()
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      } else {
+        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' +
+          'appid=wx8424b50f28a525e1' +
+          '&redirect_uri=http%3a%2f%2fwww.companycheck.cn' +
+          '&response_type=code' +
+          '&scope=snsapi_userinfo' +
+          '&state=123#wechat_redirect'
+      }
     } else {
       next()
     }
   } else {
-    alert('请在微信浏览器中打开')
-    return false
+    next() // 确保一定要调用 next()
   }
 }) */
 
