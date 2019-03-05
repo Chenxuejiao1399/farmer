@@ -66,3 +66,11 @@
     width:45px;
     height: 45px;
 }
+
+/*type=default 的按钮样式*/
+.van-button--default {
+    color: #fff;
+    background-color: #6BB44E;
+    border: 1px solid #6BB44E;
+    width: 90vw;
+}

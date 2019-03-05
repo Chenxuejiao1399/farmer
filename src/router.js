@@ -123,6 +123,24 @@ export default new Router({
     }
   },
   {
+    path: '/feedback',
+    name: 'FeedBack',
+    component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/FeedBack'),
+    meta: {
+      title: '工作反馈',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/plantwarning',
+    name: 'PlantWarning',
+    component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/PlantWarning'),
+    meta: {
+      title: '种植预警',
+      requiresAuth: false
+    }
+  },
+  {
     path: '/productmanagement',
     name: 'ProductManagement',
     component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/ProductManagement'),

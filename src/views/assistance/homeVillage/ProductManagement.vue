@@ -78,7 +78,7 @@
 
 <script>
 export default {
-  name: 'ProductManagement',
+  name: 'ProductManagement'
 }
 </script>
 

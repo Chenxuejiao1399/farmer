@@ -1,11 +1,13 @@
 <template>
   <div>
-    <vue-headful title="本村项目e"></vue-headful>
-    <van-tabs sticky v-model="active">
+    <vue-headful title="本村项目"></vue-headful>
+    <van-tabs sticky>
       <van-tab title="本村项目">
         <project-list></project-list>
       </van-tab>
-      <van-tab title="我的合作社">我的合作社</van-tab>
+      <van-tab title="我的合作社">
+        <project-list></project-list>
+      </van-tab>
     </van-tabs>
   </div>
 </template>

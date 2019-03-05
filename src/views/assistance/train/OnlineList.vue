@@ -42,11 +42,26 @@ export default {
   name: 'OnlineList',
   data () {
     return {
-      lists: [{ name: '百花湖村', isShow: false }, { name: '百花湖村', isShow: false }, { name: '百花湖村', isShow: true, farmers: [{ name: '喜庆' }, { name: '喜庆' }] }, { name: '百花湖村', isShow: false }]
+      lists: [{ name: '百花湖村', isShow: false }, { name: '百花湖村', isShow: false }, { name: '百花湖村', isShow: true, farmers: [{ name: '喜庆' }, { name: '喜庆' }] }, { name: '百花湖村', isShow: false }],
+      websocket: null
     }
   },
-  mounted () {},
+  mounted () {
+    if ('WebSocket' in window) {
+      this.websocket = new WebSocket('ws://127.0.0.1:8283')
+      this.initWebSocket()
+    } else {
+      alert('当前浏览器 Not support websocket')
+    }
+  },
   methods: {
+    initWebSocket () {
+      console.info(this.websocket)
+      /* this.websocket.onmessage = this.websockonmessage */
+      /* this.websocket.onopen = this.websocketonopen
+      this.websocket.onerror = this.websocketonerror
+      this.websocket.onclose = this.websocketclose */
+    },
     changeClass (indexTemp, itemTemp) {
       let vm = this
       vm.lists.forEach(function (value, index, array) {

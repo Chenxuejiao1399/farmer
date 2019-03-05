@@ -43,6 +43,24 @@
           术简便粗放，可直接采用生料栽培，具有很强的抗杂能力，
           容易获得成功。
         </div>
+        <div class="project_bottom_title2">负责人：<span>张珊</span></div>
+        <div class="project_bottom_title2">联系方式：<span>18977632215</span></div>
+        <div class="circle_div1">
+          <div class="circle_content1" @click="goFeedBack">
+            <svg class="icon" aria-hidden="true" style="color: #6bb44e;font-size: 18px">
+              <use xlink:href="#icon-bianji"></use>
+            </svg>
+            <span>工作反馈</span>
+          </div>
+        </div>
+        <div class="circle_div2">
+          <div class="circle_content2" @click="goPlantWarn">
+            <svg class="icon" aria-hidden="true" style="color: #6bb44e;font-size: 18px">
+              <use xlink:href="#icon-yujing"></use>
+            </svg>
+            <span>种植预警</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -62,6 +80,14 @@ export default {
       ],
       listData: ['球盖菇对生长的环境有什么要求?', '栽培原料来源丰富，它可生长在各种秸秆培养料上的栽培原料来源丰富，它可生长在各种秸秆培养料上的',
         '大球盖菇在自然界中分布于欧洲、北美洲，亚洲', '水分是大球盖菇菌丝？', '水分是大球盖菇菌丝？']
+    }
+  },
+  methods: {
+    goFeedBack () {
+      this.$router.push({ name: 'FeedBack' })
+    },
+    goPlantWarn () {
+      this.$router.push({ name: 'PlantWarning' })
     }
   }
 }
@@ -124,6 +150,7 @@ export default {
   .project_detail{
     background-color: #ffffff;
     padding: 1vh 4vw;
+    position: relative;
   }
 
   .project_name{
@@ -149,5 +176,54 @@ export default {
     font-weight: bold;
     font-size: 15px;
     padding: 1vh 0;
+  }
+
+  .project_bottom_title2{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 1vh 0;
+  }
+
+  .project_bottom_title2 span{
+    font-weight: normal;
+    font-size: 14px;
+  }
+
+  .circle_div1{
+    position: absolute;
+    top: 20vh;
+    left: 10vw;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow:2px 1px 15px #ccc;
+    font-size: 13px;
+  }
+
+  .circle_div1 .circle_content1{
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circle_div2{
+    position: absolute;
+    top: 20vh;
+    right: 10vw;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow:2px 1px 15px #ccc;
+    font-size: 13px;
+  }
+
+  .circle_div2 .circle_content2{
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 </style>

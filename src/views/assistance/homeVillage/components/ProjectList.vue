@@ -1,7 +1,7 @@
 <template>
   <div class="list_bg">
     <vue-headful description="项目列表"></vue-headful>
-    <div class="list_card" v-for="(item,index) in listData" :key="index">
+    <div class="list_card" v-for="(item,index) in listData" :key="index" @click="goDetail">
       <van-row type="flex" align="center">
         <van-col span="4">
           <img src="../../../../static/3.jpg" class="avatar_lager_no">
@@ -22,6 +22,11 @@ export default {
   data () {
     return {
       listData: [{ name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }, { name: '球盖菇项目' }]
+    }
+  },
+  methods: {
+    goDetail () {
+      this.$router.push({ name: 'ProjectDetail' })
     }
   }
 }
