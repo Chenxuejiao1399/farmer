@@ -74,3 +74,30 @@
     border: 1px solid #6BB44E;
     width: 90vw;
 }
+
+/*底部宽度100%的按钮*/
+.button_100{
+    position: absolute;
+    bottom: 0;
+    background-color: #f29530;
+    color:#ffffff;
+    width: 100vw;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+    box-shadow:3px 3px 15px #c9c9c9;
+}
+
+
+ol{
+    list-style: decimal inside;
+}
+ol li{
+    height: 6vh;
+    line-height: 3vh;
+    padding-bottom: 1vh;
+}
+
+ul{
+    list-style-type: disc;
+}

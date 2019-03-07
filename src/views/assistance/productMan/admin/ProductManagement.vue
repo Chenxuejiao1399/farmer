@@ -2,7 +2,7 @@
     <div>
       <vue-headful title="生产管理"></vue-headful>
       <div class="product_top">
-        <img src="../../../static/images/product_bg.png">
+        <img src="../../../../static/images/product_bg.png">
         <div class="product_top_div">
           <div class="product_top_texts">
             <div class="product_top_name">毛栗村</div>
@@ -10,10 +10,12 @@
           </div>
           <van-row class="product_top_menu" type="flex" justify="center">
             <van-col span="6">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-chuangjianyingyong_fu1"></use>
-              </svg>
-              <div>创建新项目</div>
+              <div @click="creatProject">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-chuangjianyingyong_fu1"></use>
+                </svg>
+                <div>创建新项目</div>
+              </div>
             </van-col>
             <van-col span="6">
               <svg class="icon" aria-hidden="true" style="color:#ea71a7">
@@ -78,7 +80,12 @@
 
 <script>
 export default {
-  name: 'ProductManagement'
+  name: 'ProductManagement',
+  methods: {
+    creatProject () {
+      this.$router.push({ name: 'NewProject' })
+    }
+  }
 }
 </script>
 

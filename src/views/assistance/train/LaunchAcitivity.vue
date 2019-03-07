@@ -80,7 +80,7 @@
             @cancel = "endCancel"/>
         </van-popup>
 
-        <div class="launch_button" @click="save">
+        <div class="button_100" @click="save">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-faqihuodong"></use>
           </svg>
@@ -183,17 +183,5 @@ export default {
 
   .upload_div svg{
     font-size: 40px;
-  }
-
-  .launch_button{
-    position: absolute;
-    bottom: 0;
-    background-color: #f29530;
-    color:#ffffff;
-    width: 100vw;
-    text-align: center;
-    height: 34px;
-    line-height: 34px;
-    box-shadow:3px 3px 15px #c9c9c9;
   }
 </style>

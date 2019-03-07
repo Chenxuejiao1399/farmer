@@ -141,9 +141,36 @@ export default new Router({
     }
   },
   {
-    path: '/productmanagement',
+    path: '/warningdetail',
+    name: 'WarningDetail',
+    component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/WarningDetail'),
+    meta: {
+      title: '预警详情',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/adminproductman',
     name: 'ProductManagement',
-    component: () => import(/* webpackChunkName: "HomeVillage" */ './views/assistance/homeVillage/ProductManagement'),
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/ProductManagement'),
+    meta: {
+      title: '生产管理',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/newproject',
+    name: 'NewProject',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/NewProject'),
+    meta: {
+      title: '创建项目',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/userproductman',
+    name: 'ProductMan',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/user/ProductMan'),
     meta: {
       title: '生产管理',
       requiresAuth: false
