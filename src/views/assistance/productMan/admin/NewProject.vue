@@ -27,7 +27,7 @@
     <van-popup v-model="isCo" position="bottom">
       <van-picker :columns="columns" show-toolbar title="合作社" @cancel="onCancelCo" @confirm="onConfirmCo"/>
     </van-popup>
-    <div class="button_100" @click="addProject">
+    <div class="button_100_orange" @click="saveProject">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-faqihuodong"></use>
       </svg>
@@ -89,13 +89,13 @@ export default {
       this.cooperative = selected
       this.isCo = false
     },
-    addProject () {
-
-    },
+    saveProject () {},
     addWord () {
       this.isShowDialog = true
     },
-    saveWord () {}
+    saveWord () {
+      console.info(this.wordName)
+    }
   }
 }
 </script>

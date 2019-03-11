@@ -18,10 +18,12 @@
               </div>
             </van-col>
             <van-col span="6">
-              <svg class="icon" aria-hidden="true" style="color:#ea71a7">
-                <use xlink:href="#icon-jihuasvg1"></use>
-              </svg>
-              <div>生产计划</div>
+              <div @click="plan">
+                <svg class="icon" aria-hidden="true" style="color:#ea71a7">
+                  <use xlink:href="#icon-jihuasvg1"></use>
+                </svg>
+                <div>生产计划</div>
+              </div>
             </van-col>
             <van-col span="6">
               <svg class="icon" aria-hidden="true" style="color:#eb8344;">
@@ -84,6 +86,9 @@ export default {
   methods: {
     creatProject () {
       this.$router.push({ name: 'NewProject' })
+    },
+    plan () {
+      this.$router.push({ name: 'ProductPlan' })
     }
   }
 }

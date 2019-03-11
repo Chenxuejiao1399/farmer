@@ -76,10 +76,22 @@
 }
 
 /*底部宽度100%的按钮*/
-.button_100{
+.button_100_orange{
     position: absolute;
     bottom: 0;
     background-color: #f29530;
+    color:#ffffff;
+    width: 100vw;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+    box-shadow:3px 3px 15px #c9c9c9;
+}
+
+.button_100_green{
+    position: absolute;
+    bottom: 0;
+    background-color: #6BB44E;
     color:#ffffff;
     width: 100vw;
     text-align: center;

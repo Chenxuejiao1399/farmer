@@ -168,6 +168,33 @@ export default new Router({
     }
   },
   {
+    path: '/productplan',
+    name: 'ProductPlan',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/ProductPlan'),
+    meta: {
+      title: '生产计划',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/createprocess',
+    name: 'CreateProcess',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/CreateProcess'),
+    meta: {
+      title: '流程创建',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/processdetail',
+    name: 'ProcessDetail',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/ProcessDetail'),
+    meta: {
+      title: '任务',
+      requiresAuth: false
+    }
+  },
+  {
     path: '/userproductman',
     name: 'ProductMan',
     component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/user/ProductMan'),
