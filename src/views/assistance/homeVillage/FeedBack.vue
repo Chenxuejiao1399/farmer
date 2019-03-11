@@ -9,7 +9,7 @@
         <van-field type="textarea" rows="10" autosize v-model="con" placeholder="请输入自己的心得或工作反馈~" />
       </van-cell-group>
       <div class="btn_div">
-        <van-button type="default">默认按钮</van-button>
+        <van-button type="primary">提交</van-button>
       </div>
     </div>
 </template>

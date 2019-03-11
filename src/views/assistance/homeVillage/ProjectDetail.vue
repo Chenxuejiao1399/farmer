@@ -191,7 +191,7 @@ export default {
 
   .circle_div1{
     position: absolute;
-    top: 20vh;
+    top: 23vh;
     left: 10vw;
     width: 70px;
     height: 70px;
@@ -210,7 +210,7 @@ export default {
 
   .circle_div2{
     position: absolute;
-    top: 20vh;
+    top: 23vh;
     right: 10vw;
     width: 70px;
     height: 70px;

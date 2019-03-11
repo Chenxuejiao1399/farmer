@@ -20,19 +20,31 @@
       <van-field v-model="address" required clearable label="工作地点：" placeholder="请选择工作地点" @focus="showAddress" readonly/>
       <van-field v-model="cooperative" required clearable label="合作社：" placeholder="请选择合作社" @focus="showCo" readonly/>
     </van-cell-group>
-    <div class="add_word"><van-icon name="add-o" />自定义字段</div>
+    <div class="add_word" @click="addWord"><van-icon name="add-o" />自定义字段</div>
     <van-popup v-model="isAddress" position="bottom">
       <van-picker :columns="columns" show-toolbar title="工作地点" @cancel="onCancelAdd" @confirm="onConfirmAdd"/>
     </van-popup>
     <van-popup v-model="isCo" position="bottom">
       <van-picker :columns="columns" show-toolbar title="合作社" @cancel="onCancelCo" @confirm="onConfirmCo"/>
     </van-popup>
-    <div class="button_100" @click="save">
+    <div class="button_100" @click="addProject">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-faqihuodong"></use>
       </svg>
       创建
     </div>
+
+    <van-dialog
+      v-model="isShowDialog"
+      title = "自定义字段"
+      show-cancel-button
+      @confirm = "saveWord">
+      <van-field
+        v-model="wordName"
+        label="字段名称"
+        placeholder="请输入字段名称"
+      />
+    </van-dialog>
   </div>
 </template>
 
@@ -50,7 +62,9 @@ export default {
       isAddress: false,
       columns: ['地点1', '地点1'],
       cooperative: '',
-      isCo: false
+      isCo: false,
+      isShowDialog: false,
+      wordName: ''
     }
   },
   methods: {
@@ -74,7 +88,14 @@ export default {
     onConfirmCo (selected) {
       this.cooperative = selected
       this.isCo = false
-    }
+    },
+    addProject () {
+
+    },
+    addWord () {
+      this.isShowDialog = true
+    },
+    saveWord () {}
   }
 }
 </script>
