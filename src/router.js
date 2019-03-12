@@ -195,6 +195,42 @@ export default new Router({
     }
   },
   {
+    path: '/memberman',
+    name: 'MemberMan',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/MemberMan'),
+    meta: {
+      title: '人员管理',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/projectdetail2',
+    name: 'ProjectDetail2',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/ProjectDetail2'),
+    meta: {
+      title: '项目详情',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/labour',
+    name: 'Labour',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/Labour'),
+    meta: {
+      title: '劳工招募',
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/tools',
+    name: 'Tools',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/admin/Tools'),
+    meta: {
+      title: '农资管理',
+      requiresAuth: false
+    }
+  },
+  {
     path: '/userproductman',
     name: 'ProductMan',
     component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/user/ProductMan'),

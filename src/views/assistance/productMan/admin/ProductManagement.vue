@@ -26,16 +26,20 @@
               </div>
             </van-col>
             <van-col span="6">
-              <svg class="icon" aria-hidden="true" style="color:#eb8344;">
-                <use xlink:href="#icon-renyuanguanli"></use>
-              </svg>
-              <div>人员管理</div>
+              <div @click="goMember">
+                <svg class="icon" aria-hidden="true" style="color:#eb8344;">
+                  <use xlink:href="#icon-renyuanguanli"></use>
+                </svg>
+                <div>人员管理</div>
+              </div>
             </van-col>
             <van-col span="6">
-              <svg class="icon" aria-hidden="true" style="color:#90d94c">
-                <use xlink:href="#icon-nongye"></use>
-              </svg>
-              <div>农资管理</div>
+              <div @click="goTools">
+                <svg class="icon" aria-hidden="true" style="color:#90d94c">
+                  <use xlink:href="#icon-nongye"></use>
+                </svg>
+                <div>农资管理</div>
+              </div>
             </van-col>
           </van-row>
         </div>
@@ -89,6 +93,12 @@ export default {
     },
     plan () {
       this.$router.push({ name: 'ProductPlan' })
+    },
+    goMember () {
+      this.$router.push({ name: 'MemberMan' })
+    },
+    goTools () {
+      this.$router.push({ name: 'Tools' })
     }
   }
 }
