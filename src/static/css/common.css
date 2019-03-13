@@ -75,6 +75,11 @@
     width: 90vw;
 }
 
+.van-button--plain.van-button--danger{
+    color: #6BB44E;
+    border: 1px solid #6BB44E;
+}
+
 /*底部宽度100%的按钮*/
 .button_100_orange{
     position: absolute;
@@ -101,7 +106,7 @@
 }
 
 
-ol{
+ol,ul{
     list-style: decimal inside;
 }
 ol li{

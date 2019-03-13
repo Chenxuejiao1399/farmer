@@ -240,6 +240,15 @@ export default new Router({
     }
   },
   {
+    path: '/projectdetail3',
+    name: 'ProjectDetail3',
+    component: () => import(/* webpackChunkName: "ProductMan" */ './views/assistance/productMan/user/ProjectDetail3'),
+    meta: {
+      title: '项目详情',
+      requiresAuth: false
+    }
+  },
+  {
     path: '/industry',
     name: 'Industry',
     component: () => import(/* webpackChunkName: "Industry" */ './views/assistance/industry/Industry'),

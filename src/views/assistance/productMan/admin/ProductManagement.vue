@@ -150,7 +150,7 @@ export default {
   }
 
   .product_middle{
-    margin-top: 7vh;
+    margin-top: 55px;
   }
 
   .product_middle svg{

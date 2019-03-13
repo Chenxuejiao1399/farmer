@@ -1,7 +1,7 @@
 <template>
     <div>
       <vue-headful title="生产管理"></vue-headful>
-      <div class="product_card">
+      <div class="product_card" @click="goDetail">
         <div class="product_tag">松土</div>
         <div class="product_con">
           <div class="product_row bottom_line">
@@ -39,6 +39,11 @@ export default {
   data () {
     return {
       lists: [{ name: '张可' }, { name: '张可' }, { name: '张可' }, { name: '张可' }, { name: '张可' }, { name: '张可' }]
+    }
+  },
+  methods: {
+    goDetail () {
+      this.$router.push({ name: 'ProjectDetail3' })
     }
   }
 }

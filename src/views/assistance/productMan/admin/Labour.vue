@@ -10,7 +10,12 @@
       <van-field v-model="cooperative" label="合作社："/>
       <van-field v-model="labourNum" type="number" label="招募人数：" placeholder="请填写招募人数" required/>
     </van-cell-group>
-    <div class="button_100_green">发布招募</div>
+    <div class="button_100_green">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-fabu"></use>
+      </svg>
+      发布招募
+    </div>
   </div>
 </template>
 
