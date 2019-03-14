@@ -1,11 +1,6 @@
 <template>
-  <div class="hello">
-    <van-list
-      v-model="loading"
-      :finished="finished"
-      finished-text="没有更多了"
-      @load="onLoad"
-    >
+  <div>
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <div class="list_card" v-for="(item,index) in listData" :key="index">
         <van-row type="flex" :class="[index !== (listData.length-1)?'bottom_line':'','list_item']" >
           <van-col span="14">
@@ -26,7 +21,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'PolicyList',
   data () {
     return {
       listData: [],

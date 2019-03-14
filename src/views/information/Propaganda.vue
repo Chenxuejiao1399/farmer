@@ -27,7 +27,7 @@
             <van-tabs type="card" color="#6fb553" class="cardTab">
               <van-tab title="帮扶人员分布">
                 <div class="map_bg">
-                  地图
+                  <img src="http://farmerapi.companycheck.cn/api/amap/poor?zoom=15">
                 </div>
               </van-tab>
               <van-tab title="帮扶信息统计">
@@ -100,14 +100,14 @@
             </div>
           </div>
           <div class="propaganda_bottom">
-            <village-list :type="2" :listLength = "4"></village-list>
+            <village-list :type="2" :isPage = "0"></village-list>
             <div
               class="read_more"
               @click="getMore"
             >查看更多>></div>
           </div>
         </div>
-        <village-list :type="2" v-if="!isShow"></village-list>
+        <village-list :type="2" v-if="!isShow" :isPage = "1"></village-list>
       </van-tab>
     </van-tabs>
   </div>
@@ -152,14 +152,14 @@ export default {
         'http://localhost:8080/static/img/3.887c0ff1.jpg',
         'http://localhost:8080/static/img/2.28c5e1a8.jpg'
       ],
-      isShow: true,
+      isShow: true, // 默认显示列表上面的内容
       type: 'noTag'
     }
   },
   mounted () {},
   methods: {
     getMore () {
-      this.isShow = false
+      this.isShow = false// 当点击更多时，不显示列表上面的内容
     },
     getActiveTab (index) {
       if (index === 1) {
@@ -242,6 +242,12 @@ export default {
   border-radius: 5px;
   margin: 2vh 2vh 1vh 2vh;
   height: 35vh;
+}
+
+.map_bg img{
+  width: 92vw;
+  height: 35vh;
+  border-radius: 5px;
 }
 
 .propaganda_bottom {

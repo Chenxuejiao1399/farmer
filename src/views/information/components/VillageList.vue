@@ -1,58 +1,67 @@
 <template>
-  <div class="list_bg">
-    <div class="list_card" v-for="(item,index) in listData" :key="index">
-      <van-row type="flex" :class="[index !== (listData.length-1)?'bottom_line':'','list_item']">
-        <van-col span="9">
-          <img :src="item.image" class="list_img">
-        </van-col>
-        <van-col span="15" class="list_right">
-          <div class="list_title" v-text="item.title"></div>
-          <van-row class="list_time_tag">
-            <van-col span="15"><span class="list_tag" v-text="item.tag"></span></van-col>
-            <van-col span="9"><span class="list_time" v-text="$commonTools.subStr(item.updated_at,10)"></span></van-col>
-          </van-row>
-        </van-col>
-      </van-row>
-    </div>
+  <div>
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <div class="list_card" v-for="(item,index) in listData" :key="index">
+        <van-row type="flex" :class="[index !== (listData.length-1)?'bottom_line':'','list_item']">
+          <van-col span="9">
+            <img :src="item.image" class="list_img">
+          </van-col>
+          <van-col span="15" class="list_right">
+            <div class="list_title" v-text="item.title"></div>
+            <van-row class="list_time_tag">
+              <van-col span="15"><span class="list_tag" v-text="item.tag"></span></van-col>
+              <van-col span="9"><span class="list_time" v-text="$commonTools.subStr(item.updated_at,10)"></span></van-col>
+            </van-row>
+          </van-col>
+        </van-row>
+      </div>
+    </van-list>
   </div>
 </template>
 
 <script>
 export default {
   name: 'VillageList',
-  props: ['type', 'listLength'],
+  props: ['type', 'isPage'], // type是文章类型，isPage是否分页
   data () {
     return {
-      listData: []
+      listData: [],
+      loading: false,
+      finished: false,
+      curPage: 1
     }
   },
-  mounted () {
-    this.getListData()
-  },
   methods: {
-    getListData () {
+    onLoad () {
       let vm = this
-      this.$http({
-        method: 'get',
-        url: vm.$commonTools.g_restUrl + '/categories/' + vm.type + '/articles'
-      })
-        .then(function (response) {
-          vm.listData = response.data.data
+      // 异步更新数据
+      setTimeout(() => {
+        this.$http({
+          method: 'get',
+          url: vm.$commonTools.g_restUrl + '/categories/' + vm.type + '/articles',
+          params: {
+            page: vm.curPage
+          }
         })
-        .catch(function (error) {
-          console.info(error)
-        })
+          .then(function (response) {
+            vm.listData = vm.listData.concat(response.data.data)
+            vm.loading = false // 本次加载状态结束
+            vm.curPage++
+            // 数据全部加载完成
+            if (vm.curPage > response.data.meta.pagination.total_pages || vm.isPage === 0) {
+              vm.finished = true
+            }
+          })
+          .catch(function (error) {
+            console.info(error)
+          })
+      }, 500)
     }
   }
 }
 </script>
 
 <style scoped>
-.list_bg{
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
 .list_card{
   background-color: #fff;
 }

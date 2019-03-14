@@ -50,9 +50,13 @@
           </div>
           <van-row type="flex" justify="center" class="agriculture_week_row" v-for="(item,index) in weatherWeekData" :key="index">
             <van-col span="6" v-text="item.date"></van-col>
-            <van-col span="10" offset="4">
+            <van-col span="11" offset="3">
               <svg class="icon" aria-hidden="true" style="font-size: 24px">
-                <use xlink:href="#icon-zhou"></use>
+                <use :xlink:href="$commonTools.setIcon(item.cond_code_d)"></use>
+              </svg>
+              &emsp;
+              <svg class="icon" aria-hidden="true" style="font-size: 24px">
+                <use :xlink:href="$commonTools.setIcon(item.cond_code_n)"></use>
               </svg>
             </van-col>
             <van-col span="1">{{item.tmp_max}}</van-col>
@@ -108,7 +112,7 @@ export default {
         .then(function (response) {
           vm.weatherWeekData = response.data.HeWeather6[0].daily_forecast
           vm.weatherWeekData.forEach(function (ele) {
-             ele.date = vm.$commonTools.getWeek(ele.date)
+            ele.date = vm.$commonTools.getWeek(ele.date)
           })
         })
         .catch(function (error) {

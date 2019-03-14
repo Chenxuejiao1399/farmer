@@ -33,6 +33,15 @@ export default new Router({
     }
   },
   {
+    path: '/liveworld',
+    name: 'LiveWorld',
+    component: () => import(/* webpackChunkName: "Agriculture" */ './views/information/LiveWorld'),
+    meta: {
+      title: '生活天地',
+      requiresAuth: true
+    }
+  },
+  {
     path: '/training',
     name: 'Training',
     component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/Training'),
