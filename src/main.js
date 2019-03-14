@@ -19,7 +19,7 @@ Vue.component(VeHistogram.name, VeHistogram)
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
-/* router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     let token = commonTools.getCookie('user_token')
     if (!token) { // 没有token
@@ -49,13 +49,26 @@ Vue.prototype.$http = axios
           '&scope=snsapi_userinfo' +
           '&state=123#wechat_redirect'
       }
-    } else {
-      next()
+    } else if (token) {
+      let newToken = token.replace('"', '').replace('"', '')
+      axios({
+        method: 'get',
+        url: commonTools.g_restUrl + '/user',
+        headers: { 'Authorization': 'Bearer' + newToken },
+        params: {}
+      })
+        .then(function (response) {
+          console.info(response)
+          next()
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
     }
   } else {
     next() // 确保一定要调用 next()
   }
-}) */
+})
 
 /* eslint-disable no-new */
 new Vue({
