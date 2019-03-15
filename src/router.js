@@ -11,7 +11,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Propaganda" */ './views/information/Propaganda'),
     meta: {
       title: '宣传天地',
-      requiresAuth: true
+      requiresAuth: false
     }
   },
   {
@@ -29,7 +29,7 @@ export default new Router({
     component: () => import(/* webpackChunkName: "Agriculture" */ './views/information/Agriculture'),
     meta: {
       title: '农业气象',
-      requiresAuth: true
+      requiresAuth: false
     }
   },
   {

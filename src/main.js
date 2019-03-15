@@ -58,7 +58,6 @@ router.beforeEach((to, from, next) => {
         params: {}
       })
         .then(function (response) {
-          console.info(response)
           next()
         })
         .catch(function (error) {
