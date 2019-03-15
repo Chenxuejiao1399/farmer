@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'agriculture_bg': isShow }">
-    <vue-headful title="农业气象"/>
+    <vue-headful title="农业气象/科技"/>
     <van-tabs sticky :class="{ 'agriculture_tab': isShow }" @click="getActiveTab">
       <van-tab title="农业气象">
         <van-row type="flex" justify="space-between" class="agriculture_top">
@@ -65,15 +65,19 @@
         </div>
       </van-tab>
       <van-tab title="农业科技">
-
+        <policy-list :type="1"></policy-list>
       </van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
+import PolicyList from './components/PolicyList'
 export default {
   name: 'Agriculture',
+  components: {
+    'policy-list': PolicyList
+  },
   data () {
     return {
       isShow: true,

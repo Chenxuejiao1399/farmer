@@ -1,18 +1,9 @@
 <template>
   <div class="online-discuss">
     <div class="head-swiper">
-      <van-swipe
-        :autoplay="3000"
-        indicator-color="white"
-        @change="onChange"
-      >
+      <van-swipe :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-          <img
-            class="swiper-img"
-            src="@/static/images/onlineDiscuss_bg.jpg"
-            alt=""
-            srcset=""
-          >
+          <img class="swiper-img" src="@/static/images/onlineDiscuss_bg.jpg">
         </van-swipe-item>
         <van-swipe-item>2</van-swipe-item>
         <van-swipe-item>3</van-swipe-item>
@@ -31,43 +22,37 @@
       </div>
     </div>
     <div class="bottom-card">
-      <div class="icon-wrapper">
+      <div class="icon-wrapper" @click="goCoopM">
         <div>
-          <svg
-            class="icon"
-            aria-hidden="true"
-          >
+          <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sheyuan"></use>
           </svg>
         </div>
         <div>合作社成员</div>
       </div>
-      <div class="icon-wrapper">
+      <div class="icon-wrapper" @click="goMemberW">
         <div>
-          <svg
-            class="icon"
-            aria-hidden="true"
-          >
+          <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sheyuantiandi"></use>
           </svg>
         </div>
         <div>社员天地</div>
-
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'online-discuss',
+  name: 'MyCoop',
   data () {
-    return {
-
-    }
+    return {}
   },
   methods: {
-    onChange (index) {
-      console.log(index)
+    goCoopM () {
+      this.$router.push({ name: 'MemberList' })
+    },
+    goMemberW () {
+      this.$router.push({ name: 'MemberWorld' })
     }
   }
 }
@@ -152,7 +137,7 @@ export default {
     rgb(233, 79, 54) 0%,
     rgb(235, 132, 70) 100%
   );
-  box-shadow: -2.517px 3.109px 31.36px 0.64px rgba(217, 217, 217, 0.004);
+  box-shadow: 0 2px 4px rgba(200,200,200,0.5);
 }
 .icon-wrapper .icon {
   font-size: 2rem;

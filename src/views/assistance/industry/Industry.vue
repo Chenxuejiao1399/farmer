@@ -1,6 +1,7 @@
 <template>
     <div>
-      <van-tabs>
+      <vue-headful title="特色产业"></vue-headful>
+      <van-tabs sticky>
         <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
           <project-list></project-list>
         </van-tab>

@@ -80,7 +80,7 @@
             @cancel = "endCancel"/>
         </van-popup>
 
-        <div class="button_100" @click="save">
+        <div class="button_100_orange" @click="save">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-faqihuodong"></use>
           </svg>
