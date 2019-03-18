@@ -77,7 +77,7 @@
           </div>
         </div>
       </div>
-      <div class="founction-list ">
+      <div class="founction-list" @click="goLog">
         <div class="van-cell list-items">
           <div class="info-title">
             <span class="info-icon" style="color:#45decb">
@@ -113,6 +113,9 @@ export default {
     },
     goScore () {
       this.$router.push({ name: 'points' })
+    },
+    goLog () {
+      this.$router.push({ name: 'Log' })
     }
   }
 }

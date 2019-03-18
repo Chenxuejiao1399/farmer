@@ -292,7 +292,7 @@ export default new Router({
       name: 'MyCoop',
       component: () => import(/* webpackChunkName: "MyInfo" */ './views/center/MyCoop.vue'),
       meta: {
-        title: '线上交流',
+        title: '我的合作社',
         requiresAuth: true
       }
     },
@@ -319,7 +319,7 @@ export default new Router({
       name: 'MemberList',
       component: () => import(/* webpackChunkName: "MyInfo" */ './views/center/MemberList.vue'),
       meta: {
-        title: '合作社成员',
+        title: '社员列表',
         requiresAuth: true
       }
     },
@@ -328,10 +328,19 @@ export default new Router({
       name: 'MemberWorld',
       component: () => import(/* webpackChunkName: "MyInfo" */ './views/center/MemberWorld.vue'),
       meta: {
-        title: '社员天地',
+        title: '我的合作社',
         requiresAuth: true
       }
-    }
+    },
     /* 个人中心end */
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import(/* webpackChunkName: "register" */ './views/register.vue'),
+      meta: {
+        title: '注册',
+        requiresAuth: false
+      }
+    }
   ]
 })

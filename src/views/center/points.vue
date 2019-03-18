@@ -1,33 +1,23 @@
 <template>
   <div class="points">
+    <vue-headful title="积分记录"></vue-headful>
     <div class="points-header">
+      <span class="points_sum">210</span>
+      <span class="points_texts">积分记录</span>
     </div>
     <div class="points-body">
       <div class="list-table van-cell">
         <span>
-          <svg
-            class="icon"
-            aria-hidden="true"
-          >
+          <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xiangqing"></use>
           </svg>
         </span>
         <span>记录详情</span>
       </div>
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
-      >
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <ul class="cell-wrapper">
-          <li
-            class="van-cell flex-cell"
-            v-for="item in list"
-            :key="item"
-          >
-
-            <div class="">参加“我为社区献爱心”活动新增10积分。</div>
+          <li class="van-cell flex-cell" v-for="item in list" :key="item">
+            <div>参加“我为社区献爱心”活动新增10积分。</div>
             <div class="time-stamps">2018-11-30 09:21</div>
           </li>
         </ul>
@@ -77,7 +67,22 @@ export default {
   height: 15vh;
   background-image: url("../../static/images/points_header.png");
   background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.points-header .points_sum{
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.points-header .points_texts{
+  font-size: 12px;
+  color: #808080;
+}
+
 .points-body {
   margin-top: 1.5vh;
   overflow-x: hidden;
@@ -92,6 +97,7 @@ export default {
   flex-direction: column;
 }
 .time-stamps {
+  font-size: 12px;
   color: #808080;
 }
 </style>

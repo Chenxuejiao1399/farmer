@@ -43,7 +43,7 @@ export default {
     background-color: #ffffff;
     width: 44vw;
     border-radius: 4px;
-    box-shadow:3px 3px 15px #c9c9c9;
+    box-shadow:3px 3px 15px rgba(200,200,200,0.5);
     padding-bottom: 1.5vh;
     margin: 1vh 2vw;
   }
