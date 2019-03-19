@@ -19,7 +19,7 @@
       </van-tabs>
     </div>
     <div class="train_bottom">
-      <video-list></video-list>
+      <video-list :isPage="0"></video-list>
       <div class="read_more" @click="getMore">查看更多>></div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video-list></video-list>
+    <video-list :isPage="1"></video-list>
   </div>
 </template>
 
