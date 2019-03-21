@@ -1,11 +1,11 @@
 <template>
   <van-swipe :width="110" :show-indicators="false">
-    <van-swipe-item v-for="(item, index) in images" :key="index">
+    <van-swipe-item v-for="item in listData" :key="item.id">
       <div class="img_card">
-        <img :src="item"/>
+        <img :src="item.user_avatar"/>
         <div class="img_texts">
-          <span class="name">姓名</span>
-          <span class="company">世代创新文化发展有限公司</span>
+          <span class="name" v-text="item.user_name"></span>
+          <span class="company" v-text="item.name"></span>
         </div>
         <div class="img_tag" v-if="listType === 'tag'">竹林村</div>
       </div>
@@ -18,17 +18,32 @@ export default {
   name: 'SwipeCard',
   data () {
     return {
-      images: [
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg',
-        'http://localhost:8080/static/img/3.887c0ff1.jpg',
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg',
-        'http://localhost:8080/static/img/3.887c0ff1.jpg',
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg'
-      ]
+      listData: []
     }
   },
   props: {
     listType: String
+  },
+  mounted () {
+    this.getCompany()
+  },
+  methods: {
+    getCompany () {
+      let vm = this
+      this.$http({
+        method: 'get',
+        url: vm.$commonTools.g_restUrl + '/plans/1/companies',
+        params: {}
+      })
+        .then(function (response) {
+          if (response.status === 200) {
+            vm.listData = response.data.data
+          }
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
+    }
   }
 }
 </script>

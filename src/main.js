@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+import qs from 'qs'
 import router from './router'
 import Vant, { Lazyload } from 'vant'
 import vueHeadful from 'vue-headful'
@@ -18,13 +19,14 @@ Vue.component(VeHistogram.name, VeHistogram)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+Vue.prototype.$qs = qs
 
-/* router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     let token = commonTools.getCookie('user_token')
     if (!token) { // 没有token
       let code = commonTools.getUrlParams('code', window.location.search)
-      if (code) { // 有code发送给后台取用户信息
+      if (code) { // 有code发送给后台取token
         axios({
           method: 'post',
           url: commonTools.g_restUrl + '/authorizations',
@@ -34,7 +36,7 @@ Vue.prototype.$http = axios
         })
           .then(function (response) {
             if (response) {
-              commonTools.setCookie('user_token', JSON.stringify(response.data.access_token), 1)// 存用户的token
+              commonTools.setCookie('user_token', JSON.stringify(response.data.access_token), 60)// 存用户的token(60分钟)
               next()
             }
           })
@@ -44,7 +46,7 @@ Vue.prototype.$http = axios
       } else {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' +
           'appid=wx8424b50f28a525e1' +
-          '&redirect_uri=http%3a%2f%2fwww.companycheck.cn' +
+          '&redirect_uri=http%3a%2f%2fwww.companycheck.cn%2fregister' +
           '&response_type=code' +
           '&scope=snsapi_userinfo' +
           '&state=123#wechat_redirect'
@@ -67,7 +69,7 @@ Vue.prototype.$http = axios
   } else {
     next() // 确保一定要调用 next()
   }
-}) */
+})
 
 /* eslint-disable no-new */
 new Vue({

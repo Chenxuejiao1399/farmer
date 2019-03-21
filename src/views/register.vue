@@ -6,7 +6,7 @@
         <van-field v-model="name" left-icon="contact" clearable label="姓名" placeholder="请输入姓名"/>
         <van-field v-model="idNum" left-icon="other-pay" clearable label="身份证" placeholder="请输入身份证"/>
       </van-cell-group>
-      <div class="register_btn">
+      <div class="register_btn" @click="login">
         <van-button size="normal">登录</van-button>
       </div>
     </div>
@@ -19,6 +19,40 @@ export default {
     return {
       name: '',
       idNum: ''
+    }
+  },
+  methods: {
+    login () {
+      let vm = this
+      vm.$commonTools.checkToken()
+        .then(function (res) {
+          let token = vm.$commonTools.getCookie('user_token')
+          let newToken = token.replace('"', '').replace('"', '')
+          let postData = {}
+          postData.username = vm.name
+          postData.credential_id = vm.idNum
+          vm.$http({
+            method: 'post',
+            url: vm.$commonTools.g_restUrl + '/users',
+            headers: { 'Authorization': 'Bearer' + newToken },
+            data: vm.$qs.stringify(postData)
+          })
+            .then(function (response) {
+              if (response.status === 201) { // 对比成功
+                vm.$router.replace({ name: 'MyInfo' })
+              } else if (response.data.code === 100001) { // 已绑定
+                vm.$router.replace({ name: 'MyInfo' })
+              }
+            })
+            .catch(function (error) {
+              if (error.toString().substring(39) === '401') {
+                vm.$toast.fail('用户未加入注册列表')
+              }
+            })
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   }
 }
@@ -43,9 +77,7 @@ export default {
   .register_btn{
     text-align: center;
   }
-</style>
 
-<style>
   .van-cell-group{
     margin: 6vh 11vw;
     background-color: transparent;

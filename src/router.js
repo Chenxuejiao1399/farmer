@@ -339,7 +339,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "register" */ './views/register.vue'),
       meta: {
         title: '注册',
-        requiresAuth: false
+        requiresAuth: true
       }
     }
   ]

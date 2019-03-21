@@ -1,3 +1,4 @@
+import axios from 'axios'
 const commonTools = {}
 
 commonTools.g_restUrl = 'http://farmerapi.companycheck.cn/api'
@@ -28,8 +29,8 @@ commonTools.subStr = function (str, strLength) {
 
 commonTools.setCookie = function (name, value, myDay) {
   var oDate = new Date()
-  oDate.setDate(oDate.getDate() + myDay)
-  document.cookie = name + '=' + value + '; expires=' + oDate
+  oDate.setTime(oDate.getTime() + (myDay * 60 * 1000))// 单位是毫秒
+  document.cookie = name + '=' + value + '; expires=' + oDate.toUTCString()
 }
 
 commonTools.getCookie = function (name) {
@@ -296,6 +297,25 @@ commonTools.getWeek = function (date) {
       break
   }
   return weekN
+}
+
+commonTools.checkToken = function () {
+  let token = commonTools.getCookie('user_token')
+  let newToken = token.replace('"', '').replace('"', '')
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'put',
+      url: commonTools.g_restUrl + '/authorizations/current',
+      headers: { 'Authorization': 'Bearer' + newToken }
+    })
+      .then(function (response) {
+        commonTools.setCookie('user_token', JSON.stringify(response.data.access_token), 60)// 存用户的新token(60分钟)
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
+  })
 }
 export {
   commonTools

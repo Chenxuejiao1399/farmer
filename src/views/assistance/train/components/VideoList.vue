@@ -12,11 +12,12 @@
       </div>
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="video_card" v-for="(item,index) in listData" :key="index">
-          <video src="" controls="controls"></video>
+          <video :src="item.video" controls="controls"></video>
+          <div class="video_card_title" v-text="item.description"></div>
           <div class="video_card_texts">
-            <span class="video_tag" v-text="item"></span>
+            <span class="video_tag" v-text="item.tag"></span>
             <div class="video_number">
-              <van-icon name="eye-o" size="16px"/><span>223</span>
+              <van-icon name="eye-o" size="16px"/><span v-text="item.view_count"></span>
               &emsp;
               <van-icon name="chat-o" size="16px"/><span>98</span>
             </div>
@@ -35,13 +36,10 @@ export default {
       listData: [],
       loading: false,
       finished: false,
-      curPage: 1,
-      newToken: ''
+      curPage: 1
     }
   },
-  mounted () {
-    this.newToken = this.$commonTools.getCookie('user_token').replace('"', '').replace('"', '')
-  },
+  mounted () {},
   methods: {
     onLoad () {
       let vm = this
@@ -49,7 +47,7 @@ export default {
       setTimeout(() => {
         this.$http({
           method: 'get',
-          url: vm.$commonTools.g_restUrl + '/auth/videos',
+          url: vm.$commonTools.g_restUrl + '/categories/8/videos',
           params: {
             page: vm.curPage
           }
@@ -94,6 +92,7 @@ export default {
     box-shadow:4px 4px 15px #eef0ec;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    position: relative;
   }
 
   .video_card video{
@@ -106,6 +105,19 @@ export default {
     height: 5vh;
     align-items: center;
     padding: 2px 3vw;
+  }
+
+  .video_card .video_card_title{
+    position: absolute;
+    top: 0;
+    color:#fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient: vertical;
   }
 
   .video_card .video_card_texts .video_tag{

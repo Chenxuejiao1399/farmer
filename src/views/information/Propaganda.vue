@@ -9,8 +9,8 @@
         <div v-if="isShow">
           <div class="propaganda_top">
             <div class="propaganda_top_title">
-              <span>刘能镇共建目标</span>
-              <span>308座厂房</span>
+              <span v-text="targetTitle"></span>
+              <span v-text="targetCon"></span>
             </div>
             <div class="propaganda_top_icon">
               <svg class="icon" aria-hidden="true">
@@ -29,6 +29,62 @@
                 <div class="map_bg">
                   <img src="http://farmerapi.companycheck.cn/api/amap/poor?zoom=15">
                 </div>
+                <div class="map-label">
+                  <div>
+                <span class="icon-wrapper">
+                  <svg
+                    class="icon"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="#icon-icon-test"></use>
+                  </svg>
+                </span>
+                    <span>牦牛村</span>
+                  </div>
+                  <div>
+                <span class="icon-wrapper">
+                  <svg class="icon"
+                       aria-hidden="true"
+                  >
+                    <use xlink:href="#icon-icon-test"></use>
+                  </svg>
+                </span>
+                    <span>牦牛村</span>
+                  </div>
+                  <div>
+                <span class="icon-wrapper">
+                  <svg
+                    class="icon"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="#icon-icon-test"></use>
+                  </svg>
+                </span>
+                    <span>牦牛村</span>
+                  </div>
+                  <div>
+                <span class="icon-wrapper">
+                  <svg
+                    class="icon"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="#icon-icon-test"></use>
+                  </svg>
+                </span>
+                    <span>牦牛村</span>
+                  </div>
+                  <div>
+                <span class="icon-wrapper">
+                  <svg
+                    class="icon"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="#icon-icon-test"></use>
+                  </svg>
+                </span>
+                    <span>牦牛村</span>
+                  </div>
+                </div>
               </van-tab>
               <van-tab title="帮扶信息统计">
                 <div class="chart_bg">
@@ -42,62 +98,6 @@
                 </div>
               </van-tab>
             </van-tabs>
-            <div class="map-label">
-              <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                <span>牦牛村</span>
-              </div>
-              <div>
-                <span class="icon-wrapper">
-                  <svg class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                <span>牦牛村</span>
-              </div>
-              <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                <span>牦牛村</span>
-              </div>
-              <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                <span>牦牛村</span>
-              </div>
-              <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                <span>牦牛村</span>
-              </div>
-            </div>
           </div>
           <div class="propaganda_bottom">
             <village-list :type="2" :isPage = "0"></village-list>
@@ -131,33 +131,62 @@ export default {
         barWidth: 20
       },
       color: ['#f29530'],
-      grid: [{ top: 20, left: 20, bottom: 10, right: 20, show: true }]
+      grid: [{ top: 20, left: 20, bottom: 10, right: 20, show: true }],
+      xAxis: {
+        axisLabel: {
+          interval: 0 // 横轴信息全部显示
+        }
+      }
     }
     return {
       chartData: {
-        columns: ['日期', '访问用户'],
-        rows: [
-          { '日期': '1/1', '访问用户': 1393 },
-          { '日期': '1/2', '访问用户': 3530 },
-          { '日期': '1/3', '访问用户': 2923 },
-          { '日期': '1/4', '访问用户': 1723 },
-          { '日期': '1/5', '访问用户': 3792 },
-          { '日期': '1/6', '访问用户': 4593 }
-        ]
+        columns: ['name', 'count'],
+        rows: []
       },
-      images: [
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg',
-        'http://localhost:8080/static/img/3.887c0ff1.jpg',
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg',
-        'http://localhost:8080/static/img/3.887c0ff1.jpg',
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg'
-      ],
       isShow: true, // 默认显示列表上面的内容
-      type: 'noTag'
+      type: 'noTag',
+      targetTitle: '',
+      targetCon: ''
     }
   },
-  mounted () {},
+  mounted () {
+    this.getTarget()
+    this.getChartData()
+  },
   methods: {
+    getTarget () {
+      let vm = this
+      this.$http({
+        method: 'get',
+        url: vm.$commonTools.g_restUrl + '/plans',
+        params: {}
+      })
+        .then(function (response) {
+          if (response.status === 200) {
+            vm.targetTitle = response.data.data[0].name
+            vm.targetCon = response.data.data[0].description
+          }
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
+    },
+    getChartData () {
+      let vm = this
+      this.$http({
+        method: 'get',
+        url: vm.$commonTools.g_restUrl + '/poor/info',
+        params: {}
+      })
+        .then(function (response) {
+          if (response.status === 200) {
+            vm.chartData.rows = response.data.data
+          }
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
+    },
     getMore () {
       this.isShow = false// 当点击更多时，不显示列表上面的内容
     },
@@ -192,7 +221,12 @@ export default {
 }
 
 .propaganda_top_title span {
+  width: 54vw;
+  text-align: center;
   color: #fff;
+  overflow: hidden;/*超出部分隐藏*/
+  white-space: nowrap;/*不换行*/
+  text-overflow:ellipsis;/*超出部分文字以...显示*/
 }
 
 .propaganda_top_icon {

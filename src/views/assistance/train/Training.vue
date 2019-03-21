@@ -7,10 +7,12 @@
     <div class="train_box_tab">
       <van-row class="train_box_row">
         <van-col span="12" class="train_box_col train_box_col_right">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xuexi"></use>
-          </svg>
-          线下学习
+          <div @click="goOffline">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xuexi"></use>
+            </svg>
+            线下学习
+          </div>
         </van-col>
         <van-col span="12" class="train_box_col">
           <div @click="goOnline">
@@ -38,6 +40,9 @@ export default {
   methods: {
     goOnline () {
       this.$router.push({ name: 'OnlineList' })
+    },
+    goOffline () {
+      this.$router.push({ name: 'OfflineLearning' })
     }
   }
 }

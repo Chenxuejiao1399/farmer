@@ -2,9 +2,9 @@
   <div class="train_bg">
     <vue-headful title="培训天地" description="培训天地主页"></vue-headful>
     <van-swipe>
-      <van-swipe-item v-for="(image, index) in images" :key="index" class="train_swipe">
-        <img v-lazy="image"/>
-        <div>葛庄村新型农业技术培训的要点有这些术培训的要点有这些术培训的要点有这些术培训的要点有这些</div>
+      <van-swipe-item v-for="item in swipeData" :key="item.id" class="train_swipe">
+        <img v-lazy="item.image"/>
+        <div v-text="item.title"></div>
       </van-swipe-item>
     </van-swipe>
     <van-notice-bar
@@ -36,19 +36,34 @@ export default {
   },
   data () {
     return {
-      images: [
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg',
-        'http://localhost:8080/static/img/3.887c0ff1.jpg',
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg',
-        'http://localhost:8080/static/img/3.887c0ff1.jpg',
-        'http://localhost:8080/static/img/2.28c5e1a8.jpg'
-      ],
+      swipeData: [],
       type: 'tag'
     }
+  },
+  mounted () {
+    this.getSwipeData()
   },
   methods: {
     getMore () {
       this.$router.push({ name: 'StudyVideo' })
+    },
+    getSwipeData () {
+      let vm = this
+      this.$http({
+        method: 'get',
+        url: vm.$commonTools.g_restUrl + '/categories/1/articles',
+        params: {
+          page: vm.curPage
+        }
+      })
+        .then(function (response) {
+          if (response.status === 200) {
+            vm.swipeData = response.data.data
+          }
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
     }
   }
 }
