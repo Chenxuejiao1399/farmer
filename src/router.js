@@ -105,7 +105,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/LaunchAcitivity'),
       meta: {
         title: '发起活动',
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
