@@ -1,22 +1,22 @@
 <template>
   <div class="activity_bg">
     <vue-headful title="活动详情"></vue-headful>
-    <img class="activity_img" src="../../../static/2.jpg">
+    <img class="activity_img" :src="listData.image">
     <div class="activity_main">
       <div class="activity_card">
-        <div class="activity_title padding_bottom">来竹林村学习拖拉机的操作名额有限，请速来报名</div>
-        <div class="activity_sub padding_bottom">仅剩1天3小时 竹林村农业合作社举办</div>
+        <div class="activity_title padding_bottom" v-text="listData.title"></div>
+        <div class="activity_sub padding_bottom">{{listData.duration}}&emsp;{{listData.group}}举办</div>
         <div class="activity_address padding_bottom">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-didian"></use>
           </svg>
-          竹林村
+          <span v-text="listData.location"></span>
         </div>
         <div class="activity_time padding_bottom">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shijian"></use>
           </svg>
-          11-28 14:00至11-29 16:00
+          <span v-text="listData.create_at"></span>至 <span v-text="listData.end_at"></span>
         </div>
         <div class="activity_organizer padding_bottom">
           <svg class="icon" aria-hidden="true">
@@ -36,7 +36,7 @@
           <use xlink:href="#icon-xiangqing"></use>
         </svg>
         活动详情
-        <div class="activity_middle_content">来竹林村学习拖拉机的操作名额有限，请速来报名。来竹林村学习拖拉机的操作名额有限，请速来报名。</div>
+        <div class="activity_middle_content" v-text="listData.body"></div>
       </div>
 
       <div class="activity_bottom">
@@ -45,12 +45,12 @@
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-baoming1"></use>
             </svg>
-            已报名(<span>12</span>/20)
+            已报名(<span v-text="listData.volunteers_count"></span>/<span v-text="listData.limit"></span>)
           </van-col>
           <van-col span="6" class="read_more"><span @click="readMore">查看更多>></span></van-col>
         </van-row>
         <van-row class="activity_bottom_content">
-          <van-col span="4" v-for="(item,index) in sortListData" :key="index">
+          <van-col span="4" v-for="(item,index) in listData.volunteers" :key="index">
             <van-row>
               <van-col span="24">
                 <img src="../../../static/3.jpg" class="avatar">
@@ -86,10 +86,10 @@ export default {
   name: 'ActivityDetails',
   data () {
     return {
-      listData: ['刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝']
+      listData: []
     }
   },
-  computed: {
+  /* computed: {
     sortListData: function () {
       let lists = []
       for (let i = 0; i < 6; i++) {
@@ -97,13 +97,57 @@ export default {
       }
       return lists
     }
+  }, */
+  mounted () {
+    this.getDetail()
   },
   methods: {
+    getDetail () {
+      let vm = this
+      vm.$commonTools.checkToken()
+        .then(function (res) {
+          let token = vm.$commonTools.getCookie('user_token')
+          let newToken = token.replace('"', '').replace('"', '')
+          vm.$http({
+            method: 'get',
+            url: vm.$commonTools.g_restUrl + '/auth/trainnings/' + vm.$route.params.id,
+            headers: { 'Authorization': 'Bearer' + newToken }
+          })
+            .then(function (response) {
+              vm.listData = response.data
+              let remainTime = Date.parse(new Date(vm.listData.create_at)) - Date.parse(new Date())
+              vm.listData.duration = vm.$commonTools.getDuration(remainTime)
+            })
+            .catch(function (error) {
+              console.info(error)
+            })
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
+    },
     enroll () {
-      this.$dialog.confirm({
+      let vm = this
+      vm.$dialog.confirm({
         message: '你确认报名参加此活动吗？'
       }).then(() => {
-        // on confirm
+        let token = vm.$commonTools.getCookie('user_token')
+        let newToken = token.replace('"', '').replace('"', '')
+        vm.$http({
+          method: 'post',
+          url: vm.$commonTools.g_restUrl + '/auth/trainnings/2',
+          headers: { 'Authorization': 'Bearer' + newToken }
+        })
+          .then(function (response) {
+            if (response.status === 201) {
+              vm.$router.replace({ name: 'OfflineLearning' })
+            } else if (response.data.code === 100005) {
+              vm.$toast('您已参加该项目')
+            }
+          })
+          .catch(function (error) {
+            console.info(error)
+          })
       }).catch(() => {
         // on cancel
       })

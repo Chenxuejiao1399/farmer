@@ -67,14 +67,12 @@
 
         <van-popup v-model="showstart" position="bottom" :overlay="false">
           <van-datetime-picker
-            type="date"
             :formatter="formatter"
            @confirm = "startConfirm"
            @cancel = "startCancel"/>
         </van-popup>
         <van-popup v-model="showend" position="bottom" :overlay="false">
           <van-datetime-picker
-            type="date"
             :formatter="formatter"
             @confirm = "endConfirm"
             @cancel = "endCancel"/>
@@ -107,11 +105,35 @@ export default {
     }
   },
   methods: {
-    save () {},
+    save () {
+      let vm = this
+      let postData = {}
+      /* let token = vm.$commonTools.getCookie('user_token')
+      let newToken = token.replace('"', '').replace('"', '') */
+      postData.title = vm.theme
+      postData.location = vm.address
+      postData.create_at = vm.starttime
+      postData.end_at = vm.endtime
+      postData.group = vm.hostunit
+      postData.body = vm.detail
+      console.info(postData)
+      /* vm.$http({
+        method: 'post',
+        url: vm.$commonTools.g_restUrl + '/auth/trainning',
+        /!* headers: { 'Authorization': 'Bearer' + newToken }, *!/
+        data: vm.$qs.stringify(postData)
+      })
+        .then(function (response) {
+          console.info(response)
+        })
+        .catch(function (error) {
+          console.info(error)
+        }) */
+    },
 
     /* 图片上传相关start */
     onRead (file) {
-      console.log(file.content)
+      console.log(file)
     },
     /* 图片上传相关end */
 

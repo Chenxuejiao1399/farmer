@@ -13,13 +13,26 @@ commonTools.getQueryString = function (name) {
   }
 }
 
-/* 中国标准时间转换 2019-02-01 */
+/* 中国标准时间转换 2019-02-01 00:00 */
 commonTools.formatDate = function (date) {
   let d = date
   let year = d.getFullYear()
   let month = d.getMonth() + 1 > 9 ? d.getMonth() + 1 : '0' + (d.getMonth() + 1)
   let date1 = d.getDate() > 9 ? d.getDate() : '0' + d.getDate()
-  return year + '-' + month + '-' + date1
+  let hour = d.getHours() > 9 ? d.getHours() : '0' + d.getHours()
+  let minute = d.getMinutes() > 9 ? d.getMinutes() : '0' + d.getMinutes()
+  let second = d.getSeconds() > 9 ? d.getSeconds() : '0' + d.getSeconds()
+  return year + '-' + month + '-' + date1 + ' ' + hour + ':' + minute
+}
+
+/* secondsM(时间差)毫秒转化为几天几小时 */
+commonTools.getDuration = function (secondsM) {
+  let seconds = secondsM / 1000
+  let days = Math.floor(seconds / 60 / 60 / 24)
+  let hours = Math.floor(seconds / 60 / 60 - 24 * days)
+  let minutes = Math.floor(seconds / 60 - 24 * days - 60 * hours)
+  let times = '仅剩' + days + '天' + hours + '小时' + minutes + '分钟'
+  return times
 }
 
 /* 字符串截取 */

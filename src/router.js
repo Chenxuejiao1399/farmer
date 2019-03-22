@@ -82,7 +82,7 @@ export default new Router({
       }
     },
     {
-      path: '/activitydetails',
+      path: '/activitydetails/:id',
       name: 'ActivityDetails',
       component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/ActivityDetails'),
       meta: {
@@ -105,7 +105,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "Training" */ './views/assistance/train/LaunchAcitivity'),
       meta: {
         title: '发起活动',
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
