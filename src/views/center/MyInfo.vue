@@ -3,7 +3,9 @@
     <vue-headful title="个人中心"></vue-headful>
     <div class="top-part">
       <div class="header">
-        <div class=" header-logo"></div>
+        <div class="header-logo">
+          <img :src="myInfoData.avatar">
+        </div>
         <div class="sign-wrapper">
           <div class="sign">
             <span>
@@ -18,27 +20,23 @@
       <div class="info-list">
         <div class="van-cell">
           <div class="info-title">姓名</div>
-          <div class="info-text">张三</div>
+          <div class="info-text" v-text="userInfo.nickname"></div>
         </div>
         <div class="van-cell">
           <div class="info-title">手机</div>
-          <div class="info-text">张三</div>
+          <div class="info-text" v-text="userInfo.bound_phone"></div>
         </div>
         <div class="van-cell">
           <div class="info-title">性别</div>
-          <div class="info-text">张三</div>
-        </div>
-        <div class="van-cell">
-          <div class="info-title">姓名</div>
-          <div class="info-text">张三</div>
+          <div class="info-text" v-text="myInfoData.sex"></div>
         </div>
         <div class="van-cell">
           <div class="info-title">现居城市</div>
-          <div class="info-text">张三</div>
+          <div class="info-text" v-text="userInfo.village"></div>
         </div>
         <div class="van-cell">
-          <div class="info-title">详细信息</div>
-          <div class="info-text">张三</div>
+          <div class="info-title">详细地址</div>
+          <div class="info-text" v-text="userInfo.street"></div>
         </div>
       </div>
     </div>
@@ -54,7 +52,7 @@
             <span class="label">我的合作社</span>
           </div>
           <div class="info-text">
-            <span>毛利村民居委会</span>
+            <span v-text="myInfoData.coop_name"></span>
             <span class="icon-wrapper">
               <van-icon name="arrow" /></span>
           </div>
@@ -71,7 +69,7 @@
             <span class="label">我的积分</span>
           </div>
           <div class="info-text">
-            <span> 张三</span>
+            <span v-text="myInfoData.point"></span>
             <span class="icon-wrapper">
               <van-icon name="arrow" /></span>
           </div>
@@ -88,7 +86,6 @@
             <span class="label">浏览日志</span>
           </div>
           <div class="info-text">
-            <span> 张三</span>
             <span class="icon-wrapper">
               <van-icon name="arrow" /></span>
           </div>
@@ -104,10 +101,42 @@ export default {
   name: 'MyInfo',
   data () {
     return {
-
+      userInfo: '',
+      myInfoData: '',
+      coopData: ''
     }
   },
+  mounted () {
+    this.getUserInfo()
+  },
   methods: {
+    getUserInfo () {
+      let vm = this
+      vm.$commonTools.checkToken()
+        .then(function (res) {
+          let token = vm.$commonTools.getCookie('user_token')
+          let newToken = token.replace('"', '').replace('"', '')
+          vm.$http({
+            method: 'get',
+            url: vm.$commonTools.g_restUrl + '/auth/userInfo',
+            headers: { 'Authorization': 'Bearer' + newToken },
+            params: { include: 'user,coop' }
+          })
+            .then(function (response) {
+              if (response.status === 200) {
+                vm.myInfoData = response.data
+                vm.userInfo = response.data.user
+                vm.coopData = response.data.coop
+              }
+            })
+            .catch(function (error) {
+              console.info(error)
+            })
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
+    },
     goCop () {
       this.$router.push({ name: 'MyCoop' })
     },
@@ -139,12 +168,11 @@ export default {
     background-image: url("../../static/images/user_center_bg.png");
     background-size: 100% 100%;
   }
-  .header-logo {
+  .header-logo img{
     border-radius: 50%;
     border: 2px solid #ffffff;
-    background-color: black;
-    width: 20vw;
-    height: 20vw;
+    width: 19vw;
+    height: 19vw;
     position: absolute;
     top: 50%;
     margin-top: -6.5vw;

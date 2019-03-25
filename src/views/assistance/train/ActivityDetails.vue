@@ -22,13 +22,13 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dangetubiaoshangchuanmoban_fuzhi2"></use>
           </svg>
-          组织人张三
+          组织人{{createdName}}
         </div>
         <div class="activity_phone">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-cell-phone"></use>
           </svg>
-          18399813321
+          {{createdPhone}}
         </div>
       </div>
       <div class="activity_middle">
@@ -38,7 +38,6 @@
         活动详情
         <div class="activity_middle_content" v-text="listData.body"></div>
       </div>
-
       <div class="activity_bottom">
         <van-row type="flex" justify="space-between">
           <van-col span="10">
@@ -47,21 +46,20 @@
             </svg>
             已报名(<span v-text="listData.volunteers_count"></span>/<span v-text="listData.limit"></span>)
           </van-col>
-          <van-col span="6" class="read_more"><span @click="readMore">查看更多>></span></van-col>
+          <van-col span="6" class="read_more"><span @click="readMore(listData.volunteers,listData.limit,listData.volunteers_count)">查看更多>></span></van-col>
         </van-row>
         <van-row class="activity_bottom_content">
           <van-col span="4" v-for="(item,index) in listData.volunteers" :key="index">
             <van-row>
               <van-col span="24">
-                <img src="../../../static/3.jpg" class="avatar">
+                <img :src="item.avatar" class="avatar">
               </van-col>
             </van-row>
             <van-row>
-              <van-col span="24">{{item}}</van-col>
+              <van-col span="24">{{item.real_name}}</van-col>
             </van-row>
           </van-col>
         </van-row>
-
       </div>
     </div>
     <div class="activity_button" @click="enroll">
@@ -70,14 +68,12 @@
       </svg>
         立即报名
     </div>
-
     <div class="activity_circle" @click="launch">
       <div class="activity_circle_texts">
         <span>发起</span>
         <span>活动</span>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -86,18 +82,12 @@ export default {
   name: 'ActivityDetails',
   data () {
     return {
-      listData: []
+      listData: [],
+      createdName: '',
+      createdPhone: '',
+      enrollee: []
     }
   },
-  /* computed: {
-    sortListData: function () {
-      let lists = []
-      for (let i = 0; i < 6; i++) {
-        lists.push(this.listData[i])
-      }
-      return lists
-    }
-  }, */
   mounted () {
     this.getDetail()
   },
@@ -111,10 +101,13 @@ export default {
           vm.$http({
             method: 'get',
             url: vm.$commonTools.g_restUrl + '/auth/trainnings/' + vm.$route.params.id,
-            headers: { 'Authorization': 'Bearer' + newToken }
+            headers: { 'Authorization': 'Bearer' + newToken },
+            params: { include: 'user,authCategory' }
           })
             .then(function (response) {
               vm.listData = response.data
+              vm.createdName = response.data.user.real_name
+              vm.createdPhone = response.data.user.bound_phone
               let remainTime = Date.parse(new Date(vm.listData.create_at)) - Date.parse(new Date())
               vm.listData.duration = vm.$commonTools.getDuration(remainTime)
             })
@@ -155,8 +148,8 @@ export default {
     launch () {
       this.$router.push({ name: 'LaunchAcitivity' })
     },
-    readMore () {
-      this.$router.push({ name: 'RegisteredList' })
+    readMore (vol, limit, volunteersCount) {
+      this.$router.push({ name: 'RegisteredList', query: { data: vol, limit: limit, count: volunteersCount } })
     }
   }
 }

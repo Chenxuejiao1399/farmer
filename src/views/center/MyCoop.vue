@@ -12,13 +12,10 @@
     </div>
     <div class="content-box">
       <div class="content-header">
-        <div>
-          竹林村农业生产合作社
-        </div>
+        <div v-text="coopData.name"></div>
       </div>
       <div class="content-text">
-        <p>合作社是劳动群众自愿联合起来进行合作生产、合作经营所建立的一种合作组织形式。所谓合作经济组织，首先强调的是“合作”，然后是“经济组织”，这是两个基本要素。</p>
-        <p>从事推销、购买、运输等流通领域服务业务的合作社。如供销合作社、运输合作社、消费合作社、购买合作社等。</p>
+        <p v-text="coopData.body"></p>
       </div>
     </div>
     <div class="bottom-card">
@@ -45,9 +42,37 @@
 export default {
   name: 'MyCoop',
   data () {
-    return {}
+    return {
+      coopData: ''
+    }
+  },
+  mounted () {
+    this.getCoopData()
   },
   methods: {
+    getCoopData () {
+      let vm = this
+      vm.$commonTools.checkToken()
+        .then(function (res) {
+          let token = vm.$commonTools.getCookie('user_token')
+          let newToken = token.replace('"', '').replace('"', '')
+          vm.$http({
+            method: 'get',
+            url: vm.$commonTools.g_restUrl + '/auth/coop',
+            headers: { 'Authorization': 'Bearer' + newToken },
+            params: { include: 'user,coop' }
+          })
+            .then(function (response) {
+              vm.coopData = response.data
+            })
+            .catch(function (error) {
+              console.info(error)
+            })
+        })
+        .catch(function (error) {
+          console.info(error)
+        })
+    },
     goCoopM () {
       this.$router.push({ name: 'MemberList' })
     },

@@ -18,11 +18,6 @@ export default {
   name: 'OfflineLearning',
   components: {
     'activity-list': ActivityList
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>

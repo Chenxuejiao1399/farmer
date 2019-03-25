@@ -5,17 +5,17 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-baoming1"></use>
       </svg>
-      已报名(<span>12</span>/20)
+      已报名(<span v-text="volunteers_count"></span>/<span v-text="limit"></span>)
     </div>
-    <div :class="[index !== (listData.length-1)?'bottom_line':'','register_list_item']"  v-for="(item,index) in listData" :key="index">
+    <div :class="[index !== (listData.length-1)?'bottom_line':'','register_list_item']"  v-for="(item,index) in listData" :key="item.id">
       <van-row type="flex" justify="space-between" align="center" class="register_list_item_content">
-        <van-col span="18">
+        <van-col span="14">
           <div class="register_list_left">
-            <img src="../../../static/3.jpg" class="avatar">
-            &nbsp;<span v-text="item"></span>
+            <img :src="item.avatar" class="avatar">
+            &nbsp;<span v-text="item.name"></span>
           </div>
         </van-col>
-        <van-col span="6">2018-02-12</van-col>
+        <van-col span="10"><span v-text="item.pivot.created_at"></span></van-col>
       </van-row>
     </div>
   </div>
@@ -26,8 +26,16 @@ export default {
   name: 'RegisteredList',
   data () {
     return {
-      listData: ['刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝', '刘贝贝']
+      listData: [],
+      limit: 0,
+      volunteers_count: 0
     }
+  },
+  mounted () {
+    let vm = this
+    vm.listData = this.$route.query.data
+    vm.limit = this.$route.query.limit
+    vm.volunteers_count = this.$route.query.count
   }
 }
 </script>
