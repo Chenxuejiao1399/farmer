@@ -29,62 +29,6 @@
                 <div class="map_bg">
                   <img src="http://farmerapi.companycheck.cn/api/amap/poor?zoom=15">
                 </div>
-                <div class="map-label">
-                  <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                    <span>牦牛村</span>
-                  </div>
-                  <div>
-                <span class="icon-wrapper">
-                  <svg class="icon"
-                       aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                    <span>牦牛村</span>
-                  </div>
-                  <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                    <span>牦牛村</span>
-                  </div>
-                  <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                    <span>牦牛村</span>
-                  </div>
-                  <div>
-                <span class="icon-wrapper">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                  >
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                </span>
-                    <span>牦牛村</span>
-                  </div>
-                </div>
               </van-tab>
               <van-tab title="帮扶信息统计">
                 <div class="chart_bg">
@@ -100,14 +44,11 @@
             </van-tabs>
           </div>
           <div class="propaganda_bottom">
-            <village-list :type="2" :isPage = "0"></village-list>
-            <div
-              class="read_more"
-              @click="getMore"
-            >查看更多>></div>
+            <village-list :type="2" :isPage="0"></village-list>
+            <div class="read_more" @click="getMore">查看更多>></div>
           </div>
         </div>
-        <village-list :type="2" v-if="!isShow" :isPage = "1"></village-list>
+        <village-list :type="2" v-if="!isShow" :isPage="1"></village-list>
       </van-tab>
     </van-tabs>
   </div>
@@ -124,7 +65,7 @@ export default {
     'village-list': VillageList,
     'swipe-card': SwipeCard
   },
-  data () {
+  data() {
     this.extend = {
       series: {
         label: { show: true, position: 'top', color: '#000' },
@@ -139,9 +80,10 @@ export default {
       }
     }
     return {
+      //贫困村数据
       chartData: {
         columns: ['name', 'count'],
-        rows: []
+        rows: [],
       },
       isShow: true, // 默认显示列表上面的内容
       type: 'noTag',
@@ -149,34 +91,34 @@ export default {
       targetCon: ''
     }
   },
-  mounted () {
+  mounted() {
     this.getTarget()
     this.getChartData()
   },
   methods: {
-    getTarget () {
+    getTarget() {
       let vm = this
       this.$http({
         method: 'get',
-        url: vm.$commonTools.g_restUrl + '/plans',
+        url: vm.$commonTools.g_restUrl + '/plans',  //获取计划目标
         params: {}
       })
         .then(function (response) {
           if (response.status === 200) {
-            vm.targetTitle = response.data.data[0].name
-            vm.targetCon = response.data.data[0].description
+            vm.targetTitle = response.data.data[0].name  //获取计划目标的名称
+            vm.targetCon = response.data.data[0].description  //获取计划目标的描述
           }
         })
         .catch(function (error) {
           console.info(error)
         })
     },
-    getChartData () {
+    //获取各村贫困户统计数据
+    getChartData() {
       let vm = this
       this.$http({
         method: 'get',
-        url: vm.$commonTools.g_restUrl + '/poor/info',
-        params: {}
+        url: vm.$commonTools.g_restUrl + '/poor/info', //获取各村贫困户统计数据
       })
         .then(function (response) {
           if (response.status === 200) {
@@ -187,10 +129,10 @@ export default {
           console.info(error)
         })
     },
-    getMore () {
+    getMore() {
       this.isShow = false// 当点击更多时，不显示列表上面的内容
     },
-    getActiveTab (index) {
+    getActiveTab(index) {
       if (index === 1) {
         this.isShow = true
       }
@@ -224,9 +166,9 @@ export default {
   width: 54vw;
   text-align: center;
   color: #fff;
-  overflow: hidden;/*超出部分隐藏*/
-  white-space: nowrap;/*不换行*/
-  text-overflow:ellipsis;/*超出部分文字以...显示*/
+  overflow: hidden; /*超出部分隐藏*/
+  white-space: nowrap; /*不换行*/
+  text-overflow: ellipsis; /*超出部分文字以...显示*/
 }
 
 .propaganda_top_icon {
@@ -278,7 +220,7 @@ export default {
   height: 35vh;
 }
 
-.map_bg img{
+.map_bg img {
   width: 92vw;
   height: 35vh;
   border-radius: 5px;

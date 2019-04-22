@@ -13,19 +13,18 @@
 </template>
 
 <script>
-import ProjectList from './components/ProjectList'
+import ProjectList from "./components/ProjectList"
 export default {
-  name: 'HomeVillage',
-  data () {
+  name: "HomeVillage",
+  data() {
     return {}
   },
   components: {
-    'project-list': ProjectList
+    "project-list": ProjectList
   },
   methods: {}
 }
 </script>
 
 <style scoped>
-
 </style>

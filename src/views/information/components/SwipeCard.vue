@@ -1,13 +1,28 @@
 <template>
-  <van-swipe :width="110" :show-indicators="false">
-    <van-swipe-item v-for="item in listData" :key="item.id">
+  <van-swipe
+    :width="110"
+    :show-indicators="false"
+  >
+    <van-swipe-item
+      v-for="item in listData"
+      :key="item.id"
+    >
       <div class="img_card">
-        <img :src="item.user_avatar"/>
+        <img :src="item.user_avatar" />
         <div class="img_texts">
-          <span class="name" v-text="item.user_name"></span>
-          <span class="company" v-text="item.name"></span>
+          <span
+            class="name"
+            v-text="item.user_name"
+          ></span>
+          <span
+            class="company"
+            v-text="item.name"
+          ></span>
         </div>
-        <div class="img_tag" v-if="listType === 'tag'">竹林村</div>
+        <div
+          class="img_tag"
+          v-if="listType === 'tag'"
+        >竹林村</div>
       </div>
     </van-swipe-item>
   </van-swipe>
@@ -16,7 +31,7 @@
 <script>
 export default {
   name: 'SwipeCard',
-  data () {
+  data() {
     return {
       listData: []
     }
@@ -24,11 +39,11 @@ export default {
   props: {
     listType: String
   },
-  mounted () {
+  mounted() {
     this.getCompany()
   },
   methods: {
-    getCompany () {
+    getCompany() {
       let vm = this
       this.$http({
         method: 'get',
@@ -49,40 +64,40 @@ export default {
 </script>
 
 <style scoped>
-   .img_card{
-    padding: 1vh 0 2vh 2vw;
-  }
+.img_card {
+  padding: 1vh 0 2vh 2vw;
+}
 
-  .img_card img{
-    width: 100px;
-    border-radius: 5px
-  }
+.img_card img {
+  width: 100px;
+  border-radius: 5px;
+}
 
-  .img_card .img_texts{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.img_card .img_texts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .img_card .img_texts .name{
-    font-weight: 600;
-  }
+.img_card .img_texts .name {
+  font-weight: 600;
+}
 
-  .img_card .img_texts .company{
-    text-align: center;
-    font-size: 12px;
-    color: #666666;
-  }
+.img_card .img_texts .company {
+  text-align: center;
+  font-size: 12px;
+  color: #666666;
+}
 
-  .img_card .img_tag{
-    background-color: #f29530;
-    position: absolute;
-    top: 88px;
-    right: 3px;
-    color: #fff;
-    font-size: 12px;
-    padding: 1px 4px;
-    border-bottom-right-radius: 5px;
-    border-top-left-radius: 5px;
-  }
+.img_card .img_tag {
+  background-color: #f29530;
+  position: absolute;
+  top: 88px;
+  right: 3px;
+  color: #fff;
+  font-size: 12px;
+  padding: 1px 4px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
 </style>

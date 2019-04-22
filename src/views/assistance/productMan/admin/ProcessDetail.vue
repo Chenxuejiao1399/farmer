@@ -21,7 +21,7 @@ import Tasked from './components/Tasked'
 import Untask from './components/Untask'
 export default {
   name: 'ProcessDetail',
-  data () {
+  data() {
     return {
       isBottom: true
     }
@@ -31,7 +31,7 @@ export default {
     Untask
   },
   methods: {
-    changeTab (index) {
+    changeTab(index) {
       if (index === 0) {
         this.isBottom = true
       } else if (index === 1) {
@@ -43,30 +43,30 @@ export default {
 </script>
 
 <style scoped>
-  .tasked_bottom{
-    position: absolute;
-    bottom: 0;
-    color: #fff;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.tasked_bottom {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .tasked_success{
-    width: 50vw;
-    background-color: #6BB44E;
-    padding: 1.5vh 0;
-  }
+.tasked_success {
+  width: 50vw;
+  background-color: #6bb44e;
+  padding: 1.5vh 0;
+}
 
-  .tasked_fail{
-    width: 50vw;
-    background-color:#E95C44;
-    padding: 1.5vh 0;
-  }
+.tasked_fail {
+  width: 50vw;
+  background-color: #e95c44;
+  padding: 1.5vh 0;
+}
 </style>
 <style>
-  .van-tabs__nav--card {
-    margin: 0 100px;
-  }
+.van-tabs__nav--card {
+  margin: 0 100px;
+}
 </style>

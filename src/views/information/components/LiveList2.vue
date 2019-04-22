@@ -1,9 +1,25 @@
 <template>
   <div>
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <div :class="[index !== (listData.length-1)?'bottom_line':'','live_card']" v-for="(item,index) in listData" :key="index">
-        <div class="live_title" v-text="item.title"></div>
-        <div class="live_content" v-text="item.body"></div>
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <div
+        :class="[index !== (listData.length-1)?'bottom_line':'','live_card']"
+        v-for="(item,index) in listData"
+        :key="index"
+        @click="getArticleDetails(item.id)"
+      >
+        <div
+          class="live_title"
+          v-text="item.title"
+        ></div>
+        <div
+          class="live_content"
+          v-text="item.body"
+        ></div>
       </div>
     </van-list>
   </div>
@@ -13,7 +29,7 @@
 export default {
   name: 'LiveList2',
   props: ['type'], // type是文章类型
-  data () {
+  data() {
     return {
       listData: [],
       loading: false,
@@ -22,7 +38,7 @@ export default {
     }
   },
   methods: {
-    onLoad () {
+    onLoad() {
       let vm = this
       // 异步更新数据
       setTimeout(() => {
@@ -46,30 +62,37 @@ export default {
             console.info(error)
           })
       }, 500)
+    },
+    //点击文章列表时携带参数跳转到文章内容页
+    getArticleDetails(id) {
+      //直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: `/articledetails/${id}`,
+      })
     }
   }
 }
 </script>
 
 <style scoped>
-  .live_card{
-    margin: 0 4vw;
-    padding: 2vh 0 1vh;
-  }
+.live_card {
+  margin: 0 4vw;
+  padding: 2vh 0 1vh;
+}
 
-  .live_title{
-    font-size: 15px;
-    overflow: hidden;/*超出部分隐藏*/
-    white-space: nowrap;/*不换行*/
-    text-overflow:ellipsis;/*超出部分文字以...显示*/
-    padding-bottom: 2vh;
-  }
+.live_title {
+  font-size: 15px;
+  overflow: hidden; /*超出部分隐藏*/
+  white-space: nowrap; /*不换行*/
+  text-overflow: ellipsis; /*超出部分文字以...显示*/
+  padding-bottom: 2vh;
+}
 
-  .live_content{
-    font-size: 12px;
-    color: #999999;
-    overflow: hidden;/*超出部分隐藏*/
-    white-space: nowrap;/*不换行*/
-    text-overflow:ellipsis;/*超出部分文字以...显示*/
-  }
+.live_content {
+  font-size: 12px;
+  color: #999999;
+  overflow: hidden; /*超出部分隐藏*/
+  white-space: nowrap; /*不换行*/
+  text-overflow: ellipsis; /*超出部分文字以...显示*/
+}
 </style>

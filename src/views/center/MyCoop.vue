@@ -1,9 +1,15 @@
 <template>
   <div class="online-discuss">
     <div class="head-swiper">
-      <van-swipe :autoplay="3000" indicator-color="white">
+      <van-swipe
+        :autoplay="3000"
+        indicator-color="white"
+      >
         <van-swipe-item>
-          <img class="swiper-img" src="@/static/images/onlineDiscuss_bg.jpg">
+          <img
+            class="swiper-img"
+            src="@/static/images/onlineDiscuss_bg.jpg"
+          >
         </van-swipe-item>
         <van-swipe-item>2</van-swipe-item>
         <van-swipe-item>3</van-swipe-item>
@@ -19,17 +25,29 @@
       </div>
     </div>
     <div class="bottom-card">
-      <div class="icon-wrapper" @click="goCoopM">
+      <div
+        class="icon-wrapper"
+        @click="goCoopM"
+      >
         <div>
-          <svg class="icon" aria-hidden="true">
+          <svg
+            class="icon"
+            aria-hidden="true"
+          >
             <use xlink:href="#icon-sheyuan"></use>
           </svg>
         </div>
         <div>合作社成员</div>
       </div>
-      <div class="icon-wrapper" @click="goMemberW">
+      <div
+        class="icon-wrapper"
+        @click="goMemberW"
+      >
         <div>
-          <svg class="icon" aria-hidden="true">
+          <svg
+            class="icon"
+            aria-hidden="true"
+          >
             <use xlink:href="#icon-sheyuantiandi"></use>
           </svg>
         </div>
@@ -41,16 +59,16 @@
 <script>
 export default {
   name: 'MyCoop',
-  data () {
+  data() {
     return {
       coopData: ''
     }
   },
-  mounted () {
+  mounted() {
     this.getCoopData()
   },
   methods: {
-    getCoopData () {
+    getCoopData() {
       let vm = this
       vm.$commonTools.checkToken()
         .then(function (res) {
@@ -73,10 +91,10 @@ export default {
           console.info(error)
         })
     },
-    goCoopM () {
+    goCoopM() {
       this.$router.push({ name: 'MemberList' })
     },
-    goMemberW () {
+    goMemberW() {
       this.$router.push({ name: 'MemberWorld' })
     }
   }
@@ -162,7 +180,7 @@ export default {
     rgb(233, 79, 54) 0%,
     rgb(235, 132, 70) 100%
   );
-  box-shadow: 0 2px 4px rgba(200,200,200,0.5);
+  box-shadow: 0 2px 4px rgba(200, 200, 200, 0.5);
 }
 .icon-wrapper .icon {
   font-size: 2rem;
