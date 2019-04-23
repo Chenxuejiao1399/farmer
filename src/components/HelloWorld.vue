@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
-    <vue-headful title="个人中心"></vue-headful>
-    <h4>欢迎进入</h4>
+    <van-cell-group>
+      <van-cell title="农民平台" label="农民平台中心"/>
+    </van-cell-group>
   </div>
 </template>
 
