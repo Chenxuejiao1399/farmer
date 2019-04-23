@@ -6,7 +6,8 @@
         <Tasked></Tasked>
       </van-tab>
       <van-tab title="派发任务">
-        <Untask></Untask>
+        <Untask v-show="userRoleId == 4 || userRoleId == 5"></Untask>
+        <p class="noLimit" v-show="userRoleId < 4">您没有权限操作</p>
       </van-tab>
     </van-tabs>
     <div class="tasked_bottom" v-if="isBottom">
@@ -23,6 +24,7 @@ export default {
   name: 'ProcessDetail',
   data() {
     return {
+      userRoleId: this.$store.state.userRole,
       isBottom: true
     }
   },
@@ -30,6 +32,7 @@ export default {
     Tasked,
     Untask
   },
+
   methods: {
     changeTab(index) {
       if (index === 0) {
@@ -43,6 +46,9 @@ export default {
 </script>
 
 <style scoped>
+.noLimit {
+  text-align: center;
+}
 .tasked_bottom {
   position: absolute;
   bottom: 0;

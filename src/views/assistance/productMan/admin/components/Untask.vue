@@ -140,7 +140,6 @@ export default {
               } else if (response.data.code == 100014) {
                 vm.$toast.fail('该用户已加入此任务！')
               }
-              console.log(response)
             })
             .catch(function (error) {
               console.info(error)

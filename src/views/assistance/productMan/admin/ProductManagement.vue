@@ -8,17 +8,10 @@
           <div class="product_top_name">毛栗村</div>
           <div>毛栗村生产合作社</div>
         </div>
-        <van-row
-          class="product_top_menu"
-          type="flex"
-          justify="center"
-        >
-          <van-col span="6">
+        <van-row class="product_top_menu" type="flex" justify="center">
+          <van-col span="6" v-show="userRoleId == 4 || userRoleId == 5">
             <div @click="creatProject">
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-chuangjianyingyong_fu1"></use>
               </svg>
               <div>创建新项目</div>
@@ -26,11 +19,7 @@
           </van-col>
           <van-col span="6">
             <div @click="plan">
-              <svg
-                class="icon"
-                aria-hidden="true"
-                style="color:#ea71a7"
-              >
+              <svg class="icon" aria-hidden="true" style="color:#ea71a7">
                 <use xlink:href="#icon-jihuasvg1"></use>
               </svg>
               <div>生产计划</div>
@@ -38,11 +27,7 @@
           </van-col>
           <van-col span="6">
             <div @click="goMember">
-              <svg
-                class="icon"
-                aria-hidden="true"
-                style="color:#eb8344;"
-              >
+              <svg class="icon" aria-hidden="true" style="color:#eb8344;">
                 <use xlink:href="#icon-renyuanguanli"></use>
               </svg>
               <div>人员管理</div>
@@ -50,11 +35,7 @@
           </van-col>
           <van-col span="6">
             <div @click="goTools">
-              <svg
-                class="icon"
-                aria-hidden="true"
-                style="color:#90d94c"
-              >
+              <svg class="icon" aria-hidden="true" style="color:#90d94c">
                 <use xlink:href="#icon-nongye"></use>
               </svg>
               <div>农资管理</div>
@@ -65,62 +46,37 @@
     </div>
     <div class="product_middle">
       <div class="product_middle_title">
-        <svg
-          class="icon"
-          aria-hidden="true"
-        >
+        <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zhongzhi"></use>
         </svg>
         种植土地分布
-        <svg
-          class="icon"
-          aria-hidden="true"
-        >
+        <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-tudi"></use>
         </svg>
       </div>
-      <div class="product_middle_map">
-        地图
-      </div>
+      <div class="product_middle_map">地图</div>
     </div>
     <div class="product_bottom">
       <div>
-        <svg
-          class="icon"
-          aria-hidden="true"
-          style="color: #e0796a"
-        >
+        <svg class="icon" aria-hidden="true" style="color: #e0796a">
           <use xlink:href="#icon-didian"></use>
         </svg>竹林村
       </div>
       <div>
-        <svg
-          class="icon"
-          aria-hidden="true"
-          style="color: #4e9c2c"
-        >
+        <svg class="icon" aria-hidden="true" style="color: #4e9c2c">
           <use xlink:href="#icon-didian"></use>
         </svg>竹林村
       </div>
       <div>
-        <svg
-          class="icon"
-          aria-hidden="true"
-          style="color: #dbbe15"
-        >
+        <svg class="icon" aria-hidden="true" style="color: #dbbe15">
           <use xlink:href="#icon-didian"></use>
         </svg>竹林村
       </div>
       <div>
-        <svg
-          class="icon"
-          aria-hidden="true"
-          style="color: #e7851c"
-        >
+        <svg class="icon" aria-hidden="true" style="color: #e7851c">
           <use xlink:href="#icon-didian"></use>
         </svg>竹林村
       </div>
-
     </div>
   </div>
 </template>
@@ -130,23 +86,23 @@ export default {
   name: 'ProductManagement',
   data() {
     return {
-
+      userRoleId: this.$store.state.userRole,
     }
-  },
-  mounted() {
-
   },
   methods: {
     //跳转创建项目
     creatProject() {
       this.$router.push({ name: 'NewProject' })
     },
+    //生产计划
     plan() {
       this.$router.push({ name: 'ProductPlan' })
     },
+    //人员管理
     goMember() {
       this.$router.push({ name: 'MemberMan' })
     },
+    //农资管理
     goTools() {
       this.$router.push({ name: 'Tools' })
     }

@@ -9,10 +9,7 @@
         <div class="sign-wrapper">
           <div class="sign">
             <span>
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-qiandao"></use>
               </svg>
             </span>
@@ -23,56 +20,32 @@
       <div class="info-list">
         <div class="van-cell">
           <div class="info-title">姓名</div>
-          <div
-            class="info-text"
-            v-text="userInfo.nickname"
-          ></div>
+          <div class="info-text" v-text="userInfo.nickname"></div>
         </div>
         <div class="van-cell">
           <div class="info-title">手机</div>
-          <div
-            class="info-text"
-            v-text="userInfo.bound_phone"
-          ></div>
+          <div class="info-text" v-text="userInfo.bound_phone"></div>
         </div>
         <div class="van-cell">
           <div class="info-title">性别</div>
-          <div
-            class="info-text"
-            v-text="myInfoData.sex"
-          ></div>
+          <div class="info-text" v-text="myInfoData.sex"></div>
         </div>
         <div class="van-cell">
           <div class="info-title">现居城市</div>
-          <div
-            class="info-text"
-            v-text="userInfo.village"
-          ></div>
+          <div class="info-text" v-text="userInfo.village"></div>
         </div>
         <div class="van-cell">
           <div class="info-title">详细地址</div>
-          <div
-            class="info-text"
-            v-text="userInfo.street"
-          ></div>
+          <div class="info-text" v-text="userInfo.street"></div>
         </div>
       </div>
     </div>
     <div class="bottom-part">
-      <div
-        class="founction-list "
-        @click="goCop"
-      >
+      <div class="founction-list" @click="goCop">
         <div class="van-cell list-items">
           <div class="info-title">
-            <span
-              class="info-icon"
-              style="color:#56b5f0"
-            >
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+            <span class="info-icon" style="color:#56b5f0">
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-hezuoshe"></use>
               </svg>
             </span>
@@ -81,24 +54,16 @@
           <div class="info-text">
             <span v-text="myInfoData.coop_name"></span>
             <span class="icon-wrapper">
-              <van-icon name="arrow" /></span>
+              <van-icon name="arrow"/>
+            </span>
           </div>
         </div>
       </div>
-      <div
-        class="founction-list "
-        @click="goScore"
-      >
+      <div class="founction-list" @click="goScore">
         <div class="van-cell list-items">
           <div class="info-title">
-            <span
-              class="info-icon"
-              style="color:#f3a271"
-            >
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+            <span class="info-icon" style="color:#f3a271">
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-jifen"></use>
               </svg>
             </span>
@@ -107,24 +72,16 @@
           <div class="info-text">
             <span v-text="myInfoData.point"></span>
             <span class="icon-wrapper">
-              <van-icon name="arrow" /></span>
+              <van-icon name="arrow"/>
+            </span>
           </div>
         </div>
       </div>
-      <div
-        class="founction-list"
-        @click="goLog"
-      >
+      <div class="founction-list" @click="goLog">
         <div class="van-cell list-items">
           <div class="info-title">
-            <span
-              class="info-icon"
-              style="color:#45decb"
-            >
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+            <span class="info-icon" style="color:#45decb">
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href=" #icon-shijian"></use>
               </svg>
             </span>
@@ -132,13 +89,13 @@
           </div>
           <div class="info-text">
             <span class="icon-wrapper">
-              <van-icon name="arrow" /></span>
+              <van-icon name="arrow"/>
+            </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -170,7 +127,7 @@ export default {
           })
             .then(function (response) {
               if (response.status === 200) {
-                //console.log(response.data)
+                console.log(response.data)
                 vm.myInfoData = response.data   //返回的全部数据
                 vm.userInfo = response.data.user  //返回的数据中的user
                 vm.coopData = response.data.coop  //返回的数据中的coop

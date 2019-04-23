@@ -47,7 +47,6 @@ router.beforeEach((to, from, next) => {
             if (response) {
               commonTools.setCookie('user_token', JSON.stringify(response.data.access_token), 60) // 存用户的token(60分钟)
               next()
-
             }
           })
           .catch(function (error) {
@@ -69,28 +68,50 @@ router.beforeEach((to, from, next) => {
         .then(function (res) {
           let token = commonTools.getCookie('user_token') // 从cookie中获取token
           let newToken = token.replace('"', '').replace('"', '')
+
           axios({
               method: 'get',
-              url: commonTools.g_restUrl + '/user/verify', // 验证用户绑定接口
+              url: commonTools.g_restUrl + '/auth/role', //获取用户权限信息
               headers: {
-                Authorization: 'Bearer' + newToken
+                'Authorization': 'Bearer' + newToken
               }
             })
             .then(function (response) {
-              // 如果用户已绑定
-              if (response.data.code == 100001) {
-                //console.log('该用户已绑定')
-
-                next()
-                //在这里做权限判断
-              } else if (response.data.code == 100013) {
-                //在用户信息未绑定的情况下如果用户去的页面是登录页则跳转
-                if (to.path === '/register') {
-                  next() //注意在router.beforeEach中一定要用next()来跳出导航循环
-                } else {
-                  //如果用户去的页面不是登录页则跳转登录页
-                  next('/register')
-                }
+              if (response.status === 200) {
+                store.dispatch('setUserRole', response.data.role_id) //将用户权限id存在store中
+                axios({
+                    method: 'get',
+                    url: commonTools.g_restUrl + '/user/verify', // 验证用户绑定接口
+                    headers: {
+                      'Authorization': 'Bearer' + newToken
+                    }
+                  })
+                  .then(function (response) {
+                    // 如果用户已绑定
+                    if (response.data.code == 100001) {
+                      if (store.state.userRole == to.meta.roleId) {
+                        next()
+                      } else if (store.state.userRole < to.meta.roleId) {
+                        alert('您的权限不够，不能浏览该页面')
+                        next(false)
+                      } else if (store.state.userRole > to.meta.roleId) {
+                        next()
+                      }
+                      //next()
+                      //在这里做权限判断
+                    } else if (response.data.code == 100013) {
+                      //在用户信息未绑定的情况下如果用户去的页面是登录页则跳转
+                      if (to.path === '/register') {
+                        next() //注意在router.beforeEach中一定要用next()来跳出导航循环
+                      } else {
+                        //如果用户去的页面不是登录页则跳转登录页
+                        next('/register')
+                      }
+                    }
+                  })
+                  .catch(function (error) {
+                    console.log(error)
+                  })
               }
             })
             .catch(function (error) {

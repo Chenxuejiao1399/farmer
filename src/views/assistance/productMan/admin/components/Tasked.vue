@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       projectId: this.$route.params.id,
-      userInfo: null,
+      userInfo: '',
       missionList: null,
       isShow: false,
       taskId: null,
@@ -76,11 +76,10 @@ export default {
             headers: { 'Authorization': 'Bearer' + newToken },
             params: {
               page: 1,
-              paginate: 50
+              paginate: 100
             }
           })
             .then(function (response) {
-              console.log(response.data.data)
               let flowArr = response.data.data
               flowArr = flowArr.map(function (item, index, arr) {
                 const i = flowArr.find(_item => item.flow_id === _item.flow_id);
@@ -119,11 +118,7 @@ export default {
       })
         .then(function (response) {
           if (response.data.code == 100016) {
-            //vm.$toast.fail('完成任务')
             vm.$toast.success('完成任务！')
-            // vm.$dialog.alert({
-            //   message: '完成任务'
-            // })
             vm.getUser()
           } else if (response.data.code == 100015) {
             vm.$toast.fail('该用户已经完成此任务！')

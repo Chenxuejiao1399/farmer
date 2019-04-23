@@ -8,27 +8,15 @@
     <div class="points-body">
       <div class="list-table van-cell">
         <span>
-          <svg
-            class="icon"
-            aria-hidden="true"
-          >
+          <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xiangqing"></use>
           </svg>
         </span>
         <span>记录详情</span>
       </div>
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
-      >
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <ul class="cell-wrapper">
-          <li
-            class="van-cell flex-cell"
-            v-for="item in list"
-            :key="item"
-          >
+          <li class="van-cell flex-cell" v-for="item in list" :key="item">
             <div>参加“我为社区献爱心”活动新增10积分。</div>
             <div class="time-stamps">2018-11-30 09:21</div>
           </li>

@@ -51,23 +51,6 @@ export default {
                 vm.$toast.fail('用户未加入注册列表')
               }
             })
-          // vm.$http({
-          //   method: 'get',
-          //   url: vm.$commonTools.g_restUrl + '/auth/role',  //请求用户绑定信息接口
-          //   headers: { 'Authorization': 'Bearer' + newToken }
-          // })
-          //   .then(function (response) {
-          //     if (response.status === 200) { // 对比成功
-          //       let roleId = response.data.role_id
-          //       vm.$store.dispatch('setUserRole', roleId)
-          //     }
-          //   })
-          //   .catch(function (error) {
-          //     if (error.toString().substring(39) === '401') {
-          //       vm.$toast.fail('用户未加入注册列表')
-          //     }
-          //   })
-
         })
         .catch(function (error) {
           console.log(error)

@@ -16,7 +16,12 @@
             </van-col>
           </van-row>
         </div>
-        <van-row class="product_top_menu" type="flex" justify="center">
+        <van-row
+          class="product_top_menu"
+          type="flex"
+          justify="center"
+          v-show="userRoleId == 5 || userRoleId == 4"
+        >
           <van-col span="12">
             <div class="createProcess" @click="createProcess(item.id,item.name)">创建工作流</div>
           </van-col>
@@ -34,6 +39,7 @@ export default {
   name: 'ProductPlan',
   data() {
     return {
+      userRoleId: this.$store.state.userRole,
       planList: [], //项目列表
       curPage: 1,  //当前页
       paginate: 5, //每页显示总条数
@@ -50,7 +56,6 @@ export default {
         vm.$commonTools.checkToken()
           .then(function (res) {
             let token = vm.$commonTools.getCookie('user_token')
-            console.log(token)
             let newToken = token.replace('"', '').replace('"', '')
             vm.$http({
               method: 'get',

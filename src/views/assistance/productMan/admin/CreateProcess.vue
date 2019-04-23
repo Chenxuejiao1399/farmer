@@ -67,7 +67,7 @@ export default {
       isShow: false,
       proName: '',  //新增流程名称
       curPage: 1,  //当前页
-      paginate: 10, //每页显示总条数
+      paginate: 50, //每页显示总条数
       flowContent: [], //创建的单个流程
       flowId: null,
       flowList: null,  //装所有流程任务
@@ -86,7 +86,7 @@ export default {
       //查询该项目下的所有工作流
       vm.$http({
         method: 'get',
-        url: vm.$commonTools.g_restUrl + '/auth/projects/' + vm.id + '/flows',  ///auth/projects/6/flows?paginate=10&page=1
+        url: vm.$commonTools.g_restUrl + '/auth/projects/' + vm.id + '/flows',
         headers: { 'Authorization': 'Bearer' + newToken },
         params: {
           paginate: vm.paginate,
@@ -95,32 +95,33 @@ export default {
       })
         .then(function (response) {
           if (response.status == 200) {
+            let flowList = []
             //遍历每个流程，查询流程下面的任务
             response.data.data.forEach(element => {
-              //console.log(element.id)
+              //console.log(element.id)  每个工作流的id
               vm.$http({
                 method: 'get',
-                url: vm.$commonTools.g_restUrl + '/auth/flows/' + element.id + '/missions',  ///auth/projects/6/flows?paginate=10&page=1
+                url: vm.$commonTools.g_restUrl + '/auth/flows/' + element.id + '/missions',
                 headers: { 'Authorization': 'Bearer' + newToken },
                 params: {
-                  paginate: 20,
+                  paginate: 50,
                   page: 1
                 }
               })
                 .then(function (response) {
                   if (response.status == 200) {
-                    //console.log(response.data.data)
-                    vm.flowContent.push({
+                    flowList.push({
                       flowId: element.id,
                       flowMissions: response.data.data
                     })
                   }
+
                 })
                 .catch(function (error) {
                   console.info(error)
                 })
             })
-
+            vm.flowContent = flowList
             console.log(vm.flowContent)
           }
         })
@@ -154,6 +155,7 @@ export default {
               .then(function (response) {
                 if (response.status == 201) {
                   vm.$toast.success('创建任务成功!')
+                  vm.getFlow()
                 }
               })
               .catch(function (error) {
